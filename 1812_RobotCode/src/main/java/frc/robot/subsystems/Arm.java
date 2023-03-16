@@ -19,8 +19,8 @@ public class Arm extends SubsystemBase {
     armPiston1 = new DoubleSolenoid(GlobalConstants.PNEUMATICS_ID, PneumaticsModuleType.REVPH, ArmConstants.arm1ForwardChannel, ArmConstants.arm1ReverseChannel);
     armPiston2 = new DoubleSolenoid(GlobalConstants.PNEUMATICS_ID, PneumaticsModuleType.REVPH, ArmConstants.arm2ForwardChannel, ArmConstants.arm2ReverseChannel);
 
-    armPiston1.set(Value.kReverse);
-    armPiston2.set(Value.kReverse);
+    armPiston1.set(Value.kForward);
+    armPiston2.set(Value.kForward);
   }
   @Override
   public void periodic() {
