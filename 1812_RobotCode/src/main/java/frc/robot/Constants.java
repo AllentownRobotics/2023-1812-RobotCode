@@ -58,15 +58,15 @@ public final class Constants {
   //SPARK CAN IDS
   /*driving motor ids */
   public static final int FL_DRIVE_ID = 1;
-  public static final int BL_DRIVE_ID = 5;
+  public static final int BL_DRIVE_ID = 7;
   public static final int FR_DRIVE_ID = 3;
-  public static final int BR_DRIVE_ID = 7; 
+  public static final int BR_DRIVE_ID = 5; 
   
   /*turning motors ids */
   public static final int FL_TURN_ID = 2; 
-  public static final int BL_TURN_ID = 6; 
+  public static final int BL_TURN_ID = 8; 
   public static final int FR_TURN_ID = 4; 
-  public static final int BR_TURN_ID = 8;
+  public static final int BR_TURN_ID = 6;
   
   public static final boolean GYRO_REVERSED = false;
   
