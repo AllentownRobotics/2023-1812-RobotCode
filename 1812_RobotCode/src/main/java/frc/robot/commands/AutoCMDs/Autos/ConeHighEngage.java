@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.RobotContainer;
-import frc.robot.commands.ArmCMD;
+import frc.robot.commands.*;
 import frc.robot.commands.AutoCMDs.AutoLevel;
 import frc.robot.commands.AutoCMDs.FollowPath;
 import frc.robot.commands.AutoCMDs.ResetOdometrytoTrajectory;
@@ -24,7 +24,7 @@ public class ConeHighEngage extends SequentialCommandGroup {
       addCommands(
         new ResetOdometrytoTrajectory("path", driveSubsystem),
         new FollowPath("path", 0, 0, driveSubsystem).getCommand(),
-        new ArmCMD(armSubsystem)
+        new ArmDownCMD(armSubsystem)
       );
     }
 }

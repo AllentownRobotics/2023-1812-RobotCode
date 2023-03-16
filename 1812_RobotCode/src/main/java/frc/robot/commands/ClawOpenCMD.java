@@ -4,23 +4,24 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import frc.robot.subsystems.Arm;
+import frc.robot.subsystems.Claw;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class ArmCMD extends InstantCommand {
-  private Arm armSubsystem;
-  public ArmCMD(Arm armSubsystem) {
-    this.armSubsystem = armSubsystem;
+public class ClawOpenCMD extends InstantCommand {
+  private Claw clawSubsystem;
+  public ClawOpenCMD(Claw clawSubsystem) {
+    this.clawSubsystem = clawSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(armSubsystem);
+    addRequirements(clawSubsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    armSubsystem.toggleArm();
+    clawSubsystem.setClaw(Value.kReverse);
   }
 }

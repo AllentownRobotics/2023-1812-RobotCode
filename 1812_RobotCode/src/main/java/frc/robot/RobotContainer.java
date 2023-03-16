@@ -5,10 +5,13 @@
 package frc.robot;
 
 import frc.robot.Constants.OIConstants;
-import frc.robot.commands.ArmCMD;
-import frc.robot.commands.ClawCMD;
+import frc.robot.commands.ArmDownCMD;
+import frc.robot.commands.ArmUpCMD;
+import frc.robot.commands.ClawCloseCMD;
+import frc.robot.commands.ClawOpenCMD;
 import frc.robot.commands.CompressCMD;
-import frc.robot.commands.WristCMD;
+import frc.robot.commands.WristDownCMD;
+import frc.robot.commands.WristUpCMD;
 import frc.robot.commands.DriveCMDs.AutoLevel;
 import frc.robot.commands.DriveCMDs.DriveCMD;
 import frc.robot.commands.DriveCMDs.PseudoNodeTargeting;
@@ -39,12 +42,12 @@ public class RobotContainer {
   private final Limelight limelight = new Limelight();
   private final Arm arm = new Arm();
   private final Claw claw = new Claw();
-  private final Wrist wirst = new Wrist();
+  private final Wrist wrist = new Wrist();
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController driverController =
       new CommandXboxController(OIConstants.DRIVER_CONTROLLER);
   private final CommandXboxController operatorController =
-      new CommandXboxController(OIConstants.DRIVER_CONTROLLER);
+      new CommandXboxController(OIConstants.OPERATOR_CONTROLLER);
 
   private SendableChooser<Command> chooser = new SendableChooser<Command>();
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -52,6 +55,9 @@ public class RobotContainer {
     //default commands
     driveTrain.setDefaultCommand(new DriveCMD(driverController, false, driveTrain));
     compressor.setDefaultCommand(new CompressCMD(compressor));
+    arm.setDefaultCommand(new ArmDownCMD(arm));
+    wrist.setDefaultCommand(new WristUpCMD(wrist));
+    claw.setDefaultCommand(new ClawCloseCMD(claw));
     //chooser
     chooser.setDefaultOption("Auto", null);
     chooser.addOption("Auto", null);
@@ -81,9 +87,9 @@ public class RobotContainer {
     driverController.leftTrigger().whileTrue(new PseudoNodeTargeting(driveTrain, driverController));
 
     //operator controller configs
-    operatorController.a().onTrue(new ArmCMD(arm));
-    operatorController.b().onTrue(new ClawCMD(claw));
-    operatorController.x().onTrue(new WristCMD(wirst));
+    operatorController.a().toggleOnTrue(new ArmUpCMD(arm));
+    operatorController.b().toggleOnTrue(new WristDownCMD(wrist));
+    operatorController.x().toggleOnTrue(new ClawOpenCMD(claw));
   }
 
   /**

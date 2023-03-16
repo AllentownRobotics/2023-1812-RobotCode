@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.GlobalConstants;
 import frc.robot.Constants.WristConstants;
@@ -23,9 +24,9 @@ public class Wrist extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void toggleWrist()
+  public void setWrist(Value value)
   {
-    wristPiston1.toggle();
-    wristPiston2.toggle();
+    wristPiston1.set(value);
+    wristPiston2.set(value);
   }
 }

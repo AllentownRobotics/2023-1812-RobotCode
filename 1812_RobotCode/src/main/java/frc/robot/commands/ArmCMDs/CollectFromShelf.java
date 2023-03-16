@@ -8,9 +8,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
 import frc.robot.Constants.ClawConstants;
-import frc.robot.commands.ArmCMD;
-import frc.robot.commands.ClawCMD;
-import frc.robot.commands.WristCMD;
+import frc.robot.commands.*;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.Wrist;
@@ -25,9 +23,9 @@ public class CollectFromShelf extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       //new WaitUntilCommand(claw.getDistance()),
-      new ClawCMD(claw),
+      new ClawCloseCMD(claw),
       new WaitCommand(ClawConstants.clawCloseSeconds),
-      new WristCMD(wrist),
-      new ArmCMD(arm));
+      new WristUpCMD(wrist),
+      new ArmDownCMD(arm));
   }
 }

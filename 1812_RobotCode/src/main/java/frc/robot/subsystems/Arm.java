@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ArmConstants;
 import frc.robot.Constants.GlobalConstants;
@@ -23,9 +24,9 @@ public class Arm extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void toggleArm()
+  public void setArm(Value value)
   {
-    armPiston1.toggle();
-    armPiston2.toggle();
+    armPiston1.set(value);
+    armPiston2.set(value);
   }
 }
