@@ -6,12 +6,13 @@ package frc.robot;
 
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.ArmDownCMD;
+import frc.robot.commands.ArmToggleCMD;
 import frc.robot.commands.ArmUpCMD;
 import frc.robot.commands.ClawCloseCMD;
 import frc.robot.commands.ClawOpenCMD;
+import frc.robot.commands.ClawToggleCMD;
 import frc.robot.commands.CompressCMD;
-import frc.robot.commands.WristDownCMD;
-import frc.robot.commands.WristUpCMD;
+import frc.robot.commands.WristToggleCMD;
 import frc.robot.commands.DriveCMDs.AutoLevel;
 import frc.robot.commands.DriveCMDs.DriveCMD;
 import frc.robot.commands.DriveCMDs.PseudoNodeTargeting;
@@ -37,16 +38,16 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final DriveTrain driveTrain = new DriveTrain();
-  private final Compress compressor = new Compress();
-  private final Limelight limelight = new Limelight();
-  private final Arm arm = new Arm();
-  private final Claw claw = new Claw();
-  private final Wrist wrist = new Wrist();
+  private DriveTrain driveTrain = new DriveTrain();
+  private Compress compressor = new Compress();
+  private Limelight limelight = new Limelight();
+  private Arm arm = new Arm();
+  private Claw claw = new Claw();
+  private Wrist wrist = new Wrist();
   // Replace with CommandPS4Controller or CommandJoystick if needed
-  private final CommandXboxController driverController =
+  private CommandXboxController driverController =
       new CommandXboxController(OIConstants.DRIVER_CONTROLLER);
-  private final CommandXboxController operatorController =
+  private CommandXboxController operatorController =
       new CommandXboxController(OIConstants.OPERATOR_CONTROLLER);
 
   private SendableChooser<Command> chooser = new SendableChooser<Command>();
@@ -55,9 +56,6 @@ public class RobotContainer {
     //default commands
     driveTrain.setDefaultCommand(new DriveCMD(driverController, false, driveTrain));
     compressor.setDefaultCommand(new CompressCMD(compressor));
-    arm.setDefaultCommand(new ArmDownCMD(arm));
-    wrist.setDefaultCommand(new WristUpCMD(wrist));
-    claw.setDefaultCommand(new ClawCloseCMD(claw));
     //chooser
     chooser.setDefaultOption("Auto", null);
     chooser.addOption("Auto", null);
@@ -87,9 +85,12 @@ public class RobotContainer {
     driverController.leftTrigger().whileTrue(new PseudoNodeTargeting(driveTrain, driverController));
 
     //operator controller configs
-    operatorController.a().toggleOnTrue(new ArmUpCMD(arm));
-    operatorController.b().toggleOnTrue(new WristDownCMD(wrist));
-    operatorController.x().toggleOnTrue(new ClawOpenCMD(claw));
+    operatorController.a().onTrue(new ArmToggleCMD(arm));
+    operatorController.b().onTrue(new WristToggleCMD(wrist));
+    operatorController.x().onTrue(new ClawToggleCMD(claw));
+
+    operatorController.povUp().onTrue(new ArmUpCMD(arm));
+    operatorController.povDown().onTrue(new ArmDownCMD(arm));
   }
 
   /**

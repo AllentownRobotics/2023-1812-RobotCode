@@ -19,7 +19,7 @@ public class Claw extends SubsystemBase {
   /** Creates a new Arm. */
   public Claw() {
     clawPiston = new DoubleSolenoid(GlobalConstants.PNEUMATICS_ID, PneumaticsModuleType.REVPH, ClawConstants.clawForwardChannel, ClawConstants.clawReverseChannel);
-    //distanceSensor = new Rev2mDistanceSensor(Rev2mDistanceSensor.Port.kOnboard);
+    clawPiston.set(Value.kForward);
   }
   @Override
   public void periodic() {
@@ -30,9 +30,8 @@ public class Claw extends SubsystemBase {
   {
     clawPiston.set(value);
   }
-
-  /*public BooleanSupplier getDistance()
+  public void toggleClaw()
   {
-    return () -> (Math.abs(distanceSensor.getRange()-ClawConstants.distanceCollectThreshold)<.5);
-  }*/
+    clawPiston.toggle();
+  }
 }

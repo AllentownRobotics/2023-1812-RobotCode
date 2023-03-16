@@ -18,6 +18,9 @@ public class Wrist extends SubsystemBase {
   public Wrist() {
     wristPiston1 = new DoubleSolenoid(GlobalConstants.PNEUMATICS_ID, PneumaticsModuleType.REVPH, WristConstants.wrist1ForwardChannel, WristConstants.wrist1ReverseChannel);
     wristPiston2 = new DoubleSolenoid(GlobalConstants.PNEUMATICS_ID, PneumaticsModuleType.REVPH, WristConstants.wrist2ForwardChannel, WristConstants.wrist2ReverseChannel);
+
+    wristPiston1.set(Value.kForward);
+    wristPiston2.set(Value.kForward);
   }
   @Override
   public void periodic() {
@@ -28,5 +31,10 @@ public class Wrist extends SubsystemBase {
   {
     wristPiston1.set(value);
     wristPiston2.set(value);
+  }
+  public void toggleWrist()
+  {
+    wristPiston1.toggle();
+    wristPiston2.toggle();
   }
 }
