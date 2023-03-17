@@ -143,20 +143,16 @@ public final class Constants {
   //Arm Constants
   public static class ArmConstants
   {
-    public static final int arm1ForwardChannel = 0;
-    public static final int arm1ReverseChannel = 1;
-    public static final int arm2ForwardChannel = 2;
-    public static final int arm2ReverseChannel = 3;
+    public static final int armForwardChannel = 0;
+    public static final int armReverseChannel = 1;
     public static final double armOutSeconds = 0.0;
   }
 
   //Wrist Constants
   public static class WristConstants
   {
-    public static final int wrist1ForwardChannel = 7;
-    public static final int wrist1ReverseChannel = 6;
-    public static final int wrist2ForwardChannel = 9;
-    public static final int wrist2ReverseChannel = 8;
+    public static final int wristForwardChannel = 3;
+    public static final int wristReverseChannel = 2;
     public static final double wristOutSeconds = 0.0;
     public static final double wristInSeconds = 0.0;
   }

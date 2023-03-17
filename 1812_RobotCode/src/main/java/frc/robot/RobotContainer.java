@@ -49,7 +49,7 @@ public class RobotContainer {
   private Compress compressor = new Compress();
   private Limelight limelight = new Limelight();
   private Arm arm = new Arm();
-  private Claw claw = new Claw();
+  public Claw claw = new Claw();
   private Wrist wrist = new Wrist();
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private CommandXboxController driverController =

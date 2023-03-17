@@ -12,15 +12,12 @@ import frc.robot.Constants.GlobalConstants;
 import frc.robot.Constants.WristConstants;
 
 public class Wrist extends SubsystemBase {
-  private DoubleSolenoid wristPiston1;
-  private DoubleSolenoid wristPiston2;
+  private DoubleSolenoid wristPiston;
   /** Creates a new Arm. */
   public Wrist() {
-    wristPiston1 = new DoubleSolenoid(GlobalConstants.PNEUMATICS_ID, PneumaticsModuleType.REVPH, WristConstants.wrist1ForwardChannel, WristConstants.wrist1ReverseChannel);
-    wristPiston2 = new DoubleSolenoid(GlobalConstants.PNEUMATICS_ID, PneumaticsModuleType.REVPH, WristConstants.wrist2ForwardChannel, WristConstants.wrist2ReverseChannel);
+    wristPiston = new DoubleSolenoid(GlobalConstants.PNEUMATICS_ID, PneumaticsModuleType.REVPH, WristConstants.wristForwardChannel, WristConstants.wristReverseChannel);
 
-    wristPiston1.set(Value.kForward);
-    wristPiston2.set(Value.kForward);
+    wristPiston.set(Value.kForward);
   }
   @Override
   public void periodic() {
@@ -29,12 +26,10 @@ public class Wrist extends SubsystemBase {
 
   public void setWrist(Value value)
   {
-    wristPiston1.set(value);
-    wristPiston2.set(value);
+    wristPiston.set(value);
   }
   public void toggleWrist()
   {
-    wristPiston1.toggle();
-    wristPiston2.toggle();
+    wristPiston.toggle();
   }
 }

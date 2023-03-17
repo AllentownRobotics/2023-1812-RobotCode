@@ -18,7 +18,7 @@ import frc.robot.Constants.GlobalConstants;
 
 public class Claw extends SubsystemBase {
   private DoubleSolenoid clawPiston;
-  private Rev2mDistanceSensor distanceSensor;
+  public Rev2mDistanceSensor distanceSensor;
   //private Rev2mDistanceSensor distanceSensor;
   /** Creates a new Arm. */
   public Claw() {
