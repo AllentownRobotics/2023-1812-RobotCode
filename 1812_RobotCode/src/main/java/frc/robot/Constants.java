@@ -79,7 +79,7 @@ public final class Constants {
   
     public static final class ModuleConstants{
       /*pinion gear teeth */    
-      public static final int DRIVE_MOTOR_TEETH = 13;  
+      public static final int DRIVE_MOTOR_TEETH = 14;  
   
       public static final boolean TURN_ENCODER_INVERTED = true;
   
@@ -166,7 +166,8 @@ public final class Constants {
   {
     public static final int clawForwardChannel = 5;
     public static final int clawReverseChannel = 4;
-    public static final double distanceCollectThreshold = 14.0;
+    public static final double sensorDistance = 13.5;
+    public static final double sensorFluff = 1.0;
     public static final double clawCloseSeconds = 0.0;
   }
 }

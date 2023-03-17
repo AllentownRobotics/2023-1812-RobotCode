@@ -2,14 +2,17 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.ArmCMDs;
+package frc.robot.commands.ComplexCMDs;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
 import frc.robot.Constants.ClawConstants;
-import frc.robot.commands.*;
-import frc.robot.commands.ClawOpenCMD;
+import frc.robot.commands.ArmCMDs.ArmDownCMD;
+import frc.robot.commands.ClawCMDs.ClawCloseCMD;
+import frc.robot.commands.ClawCMDs.ClawOpenCMD;
+import frc.robot.commands.WristCMDs.WristDownCMD;
+import frc.robot.commands.WristCMDs.WristUpCMD;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.Wrist;
@@ -23,8 +26,11 @@ public class CollectFromGround extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      //new WaitUntilCommand(claw.getDistance()),
+      new ArmDownCMD(arm),
       new ClawOpenCMD(claw),
+      new WristDownCMD(wrist),
+      new WaitUntilCommand(claw::pieceInRange),
+      new ClawCloseCMD(claw),
       new WaitCommand(ClawConstants.clawCloseSeconds),
       new WristUpCMD(wrist));
   }

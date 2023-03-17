@@ -4,24 +4,31 @@
 
 package frc.robot;
 
+import frc.robot.Constants.AutoConstants;
+import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
-import frc.robot.commands.ArmDownCMD;
-import frc.robot.commands.ArmToggleCMD;
-import frc.robot.commands.ArmUpCMD;
-import frc.robot.commands.ClawCloseCMD;
-import frc.robot.commands.ClawOpenCMD;
-import frc.robot.commands.ClawToggleCMD;
 import frc.robot.commands.CompressCMD;
-import frc.robot.commands.WristToggleCMD;
+import frc.robot.commands.ArmCMDs.ArmToggleCMD;
+import frc.robot.commands.ClawCMDs.ClawCloseCMD;
+import frc.robot.commands.ClawCMDs.ClawToggleCMD;
+import frc.robot.commands.ComplexCMDs.PlaceCMD;
 import frc.robot.commands.DriveCMDs.AutoLevel;
 import frc.robot.commands.DriveCMDs.DriveCMD;
 import frc.robot.commands.DriveCMDs.PseudoNodeTargeting;
+import frc.robot.commands.WristCMDs.WristToggleCMD;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.Compress;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Wrist;
+
+import java.util.HashMap;
+
+import com.pathplanner.lib.PathPlanner;
+import com.pathplanner.lib.auto.PIDConstants;
+import com.pathplanner.lib.auto.SwerveAutoBuilder;
+
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -38,7 +45,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private DriveTrain driveTrain = new DriveTrain();
+  public DriveTrain driveTrain = new DriveTrain();
   private Compress compressor = new Compress();
   private Limelight limelight = new Limelight();
   private Arm arm = new Arm();
@@ -50,16 +57,19 @@ public class RobotContainer {
   private CommandXboxController operatorController =
       new CommandXboxController(OIConstants.OPERATOR_CONTROLLER);
 
+  HashMap<String, Command> commandsMap = new HashMap<>();
+  SwerveAutoBuilder autoBuilder = genrateAutoBuilder();
   private SendableChooser<Command> chooser = new SendableChooser<Command>();
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+    populateCommandMap();
     //default commands
-    driveTrain.setDefaultCommand(new DriveCMD(driverController, false, driveTrain));
+    driveTrain.setDefaultCommand(new DriveCMD(driverController, true, driveTrain));
     compressor.setDefaultCommand(new CompressCMD(compressor));
     //chooser
-    chooser.setDefaultOption("Auto", null);
-    chooser.addOption("Auto", null);
-    chooser.addOption("Auto", null);
+    chooser.setDefaultOption("Mid", autoBuilder.fullAuto(PathPlanner.loadPathGroup("Mid", 3.0, 3.0)));
+    chooser.addOption("Right", autoBuilder.fullAuto(PathPlanner.loadPathGroup("Right", 3.0, 3.0)));
+    chooser.addOption("Left", autoBuilder.fullAuto(PathPlanner.loadPathGroup("Left", 3.0, 3.0)));
     SmartDashboard.putData("Auto Chooser", chooser);
 
     // Configure the trigger bindings
@@ -89,8 +99,7 @@ public class RobotContainer {
     operatorController.b().onTrue(new WristToggleCMD(wrist));
     operatorController.x().onTrue(new ClawToggleCMD(claw));
 
-    operatorController.povUp().onTrue(new ArmUpCMD(arm));
-    operatorController.povDown().onTrue(new ArmDownCMD(arm));
+    operatorController.y().and(claw::pieceInRange).onTrue(new ClawCloseCMD(claw));
   }
 
   /**
@@ -101,5 +110,25 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
     return chooser.getSelected();
+  }
+
+  private void populateCommandMap()
+  {
+    commandsMap.put("autoBalance", new AutoLevel(driveTrain));
+    commandsMap.put("placeLow", new PlaceCMD(arm, wrist, claw));
+  }
+
+  private SwerveAutoBuilder genrateAutoBuilder()
+  {
+    return new SwerveAutoBuilder(
+      driveTrain::getPose,
+      driveTrain::resetOdometry,
+      DriveConstants.DRIVE_KINEMATICS,
+      new PIDConstants(AutoConstants.PX_CONTROLLER, 0, 0),
+      new PIDConstants(AutoConstants.P_THETA_CONTROLLER, 0, 0),
+      driveTrain::setModuleStates,
+      commandsMap,
+      true,
+      driveTrain);
   }
 }
