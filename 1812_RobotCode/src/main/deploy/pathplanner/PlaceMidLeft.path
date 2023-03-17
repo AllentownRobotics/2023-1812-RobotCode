@@ -17,9 +17,7 @@
       "isStopPoint": false,
       "stopEvent": {
         "names": [
-          "armUp",
-          "placeCMD",
-          "resetArm"
+          "autoArm"
         ],
         "executionBehavior": "sequential",
         "waitBehavior": "none",

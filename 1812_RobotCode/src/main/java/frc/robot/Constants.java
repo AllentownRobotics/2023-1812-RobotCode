@@ -143,9 +143,10 @@ public final class Constants {
   //Arm Constants
   public static class ArmConstants
   {
-    public static final int armForwardChannel = 0;
-    public static final int armReverseChannel = 1;
-    public static final double armOutSeconds = 0.0;
+    public static final int armForwardChannel = 1;
+    public static final int armReverseChannel = 0;
+    public static final double armUpSeconds = 1.3;
+    public static final double armDownSeconds = 0.8;
   }
 
   //Wrist Constants
@@ -153,8 +154,8 @@ public final class Constants {
   {
     public static final int wristForwardChannel = 3;
     public static final int wristReverseChannel = 2;
-    public static final double wristOutSeconds = 0.0;
-    public static final double wristInSeconds = 0.0;
+    public static final double wristOutSeconds = .75;
+    public static final double wristInSeconds = 1.3;
   }
 
   //Claw Constants
@@ -162,8 +163,9 @@ public final class Constants {
   {
     public static final int clawForwardChannel = 5;
     public static final int clawReverseChannel = 4;
-    public static final double sensorDistance = 13.5;
+    public static final double sensorDistance = 13;
     public static final double sensorFluff = 1.0;
-    public static final double clawCloseSeconds = 0.0;
+    public static final double clawCloseSeconds = 0.1;
+    public static final double clawOpenSeconds = 0.1;
   }
 }

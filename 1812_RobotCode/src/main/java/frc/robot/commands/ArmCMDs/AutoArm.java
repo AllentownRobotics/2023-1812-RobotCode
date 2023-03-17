@@ -6,6 +6,9 @@ package frc.robot.commands.ArmCMDs;
 
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.Constants.ArmConstants;
+import frc.robot.Constants.ClawConstants;
+import frc.robot.Constants.WristConstants;
 import frc.robot.commands.ClawCMDs.ClawOpenCMD;
 import frc.robot.commands.ComplexCMDs.ResetCMD;
 import frc.robot.commands.WristCMDs.WristDownCMD;
@@ -23,11 +26,11 @@ public class AutoArm extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
     new ArmUpCMD(arm), 
-    Commands.waitSeconds(4), 
+    Commands.waitSeconds(ArmConstants.armUpSeconds), 
     new WristDownCMD(wrist), 
-    Commands.waitSeconds(0.5),
+    Commands.waitSeconds(WristConstants.wristOutSeconds),
     new ClawOpenCMD(claw), 
-    Commands.waitSeconds(0.25), 
+    Commands.waitSeconds(ClawConstants.clawOpenSeconds), 
     new ResetCMD(wrist, claw, arm)
     
     );

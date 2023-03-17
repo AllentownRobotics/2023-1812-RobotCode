@@ -9,7 +9,6 @@ import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.CompressCMD;
 import frc.robot.commands.ArmCMDs.ArmDownCMD;
-import frc.robot.commands.ArmCMDs.ArmToggleCMD;
 import frc.robot.commands.ArmCMDs.ArmUpCMD;
 import frc.robot.commands.ArmCMDs.AutoArm;
 import frc.robot.commands.ClawCMDs.ClawCloseCMD;
@@ -106,12 +105,11 @@ public class RobotContainer {
     driverController.leftTrigger().whileTrue(new PseudoNodeTargeting(driveTrain, driverController));
 
     //operator controller configs
-    operatorController.a().onTrue(new ArmToggleCMD(arm));
+    operatorController.a().onTrue(new ClawToggleCMD(claw));
     operatorController.b().onTrue(new WristToggleCMD(wrist));
-    operatorController.x().onTrue(new ClawToggleCMD(claw));
-
     operatorController.y().and(claw::pieceInRange).onTrue(new ClawCloseCMD(claw));
-    operatorController.rightBumper().onTrue(new ResetCMD(arm, wrist, claw));
+    operatorController.povUp().onTrue(new ArmUpCMD(arm));
+    operatorController.povDown().onTrue(new ResetCMD(wrist, claw, arm));
   }
 
   /**
@@ -130,7 +128,7 @@ public class RobotContainer {
     commandsMap.put("placeLow", new PlaceCMD(arm, wrist, claw));
     commandsMap.put("armUp", new ArmUpCMD(arm)); 
     commandsMap.put("armDown", new ArmDownCMD(arm)); 
-    commandsMap.put("resetCMD", new ResetCMD(arm, wrist, claw)); 
+    commandsMap.put("resetCMD", new ResetCMD(wrist, claw, arm)); 
     commandsMap.put("autoArm", new AutoArm(arm, claw, wrist)); 
   }
 
