@@ -2,12 +2,12 @@
   "waypoints": [
     {
       "anchorPoint": {
-        "x": 1.892346835541129,
+        "x": 1.8534361007601472,
         "y": 5.0
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.8923468355411304,
+        "x": 2.8534361007601476,
         "y": 5.0
       },
       "holonomicAngle": 180.0,
@@ -17,7 +17,7 @@
       "isStopPoint": false,
       "stopEvent": {
         "names": [
-          "armUpCMD",
+          "armUp",
           "placeCMD",
           "resetArm"
         ],
@@ -32,11 +32,11 @@
         "y": 5.0
       },
       "prevControl": {
-        "x": 5.936533594774961,
+        "x": 5.981439086794672,
         "y": 5.0
       },
       "nextControl": {
-        "x": 5.936533594774961,
+        "x": 5.981439086794672,
         "y": 5.0
       },
       "holonomicAngle": 180.0,
@@ -58,11 +58,11 @@
       },
       "prevControl": {
         "x": 6.0,
-        "y": 3.2995589362877045
+        "y": 3.2598610769666587
       },
       "nextControl": {
         "x": 6.0,
-        "y": 3.240088212742462
+        "y": 3.240003383514292
       },
       "holonomicAngle": 180.0,
       "isReversal": false,
@@ -78,11 +78,11 @@
     },
     {
       "anchorPoint": {
-        "x": 4.25,
+        "x": 3.826222253463183,
         "y": 3.25
       },
       "prevControl": {
-        "x": 4.75,
+        "x": 4.3262222534631825,
         "y": 3.25
       },
       "nextControl": null,
@@ -101,8 +101,5 @@
       }
     }
   ],
-  "maxVelocity": 3.0,
-  "maxAcceleration": null,
-  "isReversed": null,
   "markers": []
 }

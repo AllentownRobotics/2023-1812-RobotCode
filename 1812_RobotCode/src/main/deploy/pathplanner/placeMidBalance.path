@@ -2,13 +2,13 @@
   "waypoints": [
     {
       "anchorPoint": {
-        "x": 1.8012338397558152,
-        "y": 2.75
+        "x": 1.8253537355971143,
+        "y": 2.716339218756537
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.801233839755814,
-        "y": 2.75
+        "x": 1.8410522549654929,
+        "y": 2.716339218756537
       },
       "holonomicAngle": 180.0,
       "isReversal": false,
@@ -17,7 +17,7 @@
       "isStopPoint": false,
       "stopEvent": {
         "names": [
-          "armUpCMD",
+          "armUp",
           "placeCMD",
           "resetArm"
         ],
@@ -28,16 +28,16 @@
     },
     {
       "anchorPoint": {
-        "x": 6.0,
-        "y": 2.75
+        "x": 6.536170491695821,
+        "y": 2.72
       },
       "prevControl": {
-        "x": 5.925496582259003,
-        "y": 2.75
+        "x": 6.458943987497482,
+        "y": 2.72
       },
       "nextControl": {
-        "x": 5.925496582259003,
-        "y": 2.75
+        "x": 6.458943987497482,
+        "y": 2.72
       },
       "holonomicAngle": 180.0,
       "isReversal": true,
@@ -54,11 +54,11 @@
     {
       "anchorPoint": {
         "x": 4.25,
-        "y": 2.75
+        "y": 2.72
       },
       "prevControl": {
-        "x": 3.25,
-        "y": 2.75
+        "x": 4.25,
+        "y": 2.72
       },
       "nextControl": null,
       "holonomicAngle": 180.0,
