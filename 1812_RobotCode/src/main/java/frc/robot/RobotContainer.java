@@ -15,6 +15,7 @@ import frc.robot.commands.ClawCMDs.AutoClaw;
 import frc.robot.commands.ClawCMDs.ClawCloseCMD;
 import frc.robot.commands.ClawCMDs.ClawToggleCMD;
 import frc.robot.commands.ComplexCMDs.ClawCloseWristUp;
+import frc.robot.commands.ComplexCMDs.LimeLightOn;
 import frc.robot.commands.ComplexCMDs.PlaceCMD;
 import frc.robot.commands.ComplexCMDs.ResetCMD;
 import frc.robot.commands.DriveCMDs.AutoLevel;
@@ -111,6 +112,7 @@ public class RobotContainer {
     operatorController.b().onTrue(new WristToggleCMD(wrist));
     operatorController.y().onTrue(new AutoClaw(claw, wrist));
     operatorController.x().onTrue(new ClawCloseWristUp(claw, wrist));
+    operatorController.rightBumper().whileTrue(new LimeLightOn(limelight));
     operatorController.povUp().onTrue(new ArmUpCMD(arm));
     operatorController.povDown().onTrue(new ResetCMD(wrist, claw, arm));
   }
