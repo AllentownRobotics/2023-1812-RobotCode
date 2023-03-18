@@ -8,9 +8,8 @@ import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.CompressCMD;
-import frc.robot.commands.ArmCMDs.ArmDownCMD;
+import frc.robot.commands.ArmCMDs.ArmToggleCMD;
 import frc.robot.commands.ArmCMDs.ArmUpCMD;
-import frc.robot.commands.ArmCMDs.AutoArm;
 import frc.robot.commands.ClawCMDs.ClawCloseCMD;
 import frc.robot.commands.ClawCMDs.ClawToggleCMD;
 import frc.robot.commands.ComplexCMDs.PlaceCMD;
@@ -54,7 +53,7 @@ public class RobotContainer {
   private Arm arm = new Arm();
   public Claw claw = new Claw();
   private Wrist wrist = new Wrist();
- 
+  
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private CommandXboxController driverController =
       new CommandXboxController(OIConstants.DRIVER_CONTROLLER);
@@ -64,22 +63,18 @@ public class RobotContainer {
   HashMap<String, Command> commandsMap = new HashMap<>();
   SwerveAutoBuilder autoBuilder = genrateAutoBuilder();
   private SendableChooser<Command> chooser = new SendableChooser<Command>();
- 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    
     populateCommandMap();
     //default commands
     driveTrain.setDefaultCommand(new DriveCMD(driverController, true, driveTrain));
     compressor.setDefaultCommand(new CompressCMD(compressor));
-   
     //chooser
     chooser.setDefaultOption("Mid", autoBuilder.fullAuto(PathPlanner.loadPathGroup("Mid", 3.0, 3.0)));
     chooser.addOption("Right", autoBuilder.fullAuto(PathPlanner.loadPathGroup("Right", 3.0, 3.0)));
     chooser.addOption("Left", autoBuilder.fullAuto(PathPlanner.loadPathGroup("Left", 3.0, 3.0)));
-    chooser.addOption("placeMidRight", autoBuilder.fullAuto(PathPlanner.loadPathGroup("placeMidRight", 3.0, 3.0)));
-    chooser.addOption("PlaceMidLeft", autoBuilder.fullAuto(PathPlanner.loadPathGroup("PlaceMidLeft",3.0 , 3.0)));
-    chooser.addOption("placeMidBalance", autoBuilder.fullAuto(PathPlanner.loadPathGroup("placeMidBalance", 3.0, 3.0)));
+    chooser.addOption("placeMidLeft", autoBuilder.fullAuto(PathPlanner.loadPathGroup("PlaceMidLeft", 3.0, 3.0))); 
+    chooser.addOption("placeMidRight", autoBuilder.fullAuto(PathPlanner.loadPathGroup("PlaceMidRight", 3.0, 3.0))); 
     SmartDashboard.putData("Auto Chooser", chooser);
 
     // Configure the trigger bindings
@@ -105,11 +100,12 @@ public class RobotContainer {
     driverController.leftTrigger().whileTrue(new PseudoNodeTargeting(driveTrain, driverController));
 
     //operator controller configs
-    operatorController.a().onTrue(new ClawToggleCMD(claw));
+    operatorController.a().onTrue(new ArmToggleCMD(arm));
     operatorController.b().onTrue(new WristToggleCMD(wrist));
+    operatorController.x().onTrue(new ClawToggleCMD(claw));
+
     operatorController.y().and(claw::pieceInRange).onTrue(new ClawCloseCMD(claw));
-    operatorController.povUp().onTrue(new ArmUpCMD(arm));
-    operatorController.povDown().onTrue(new ResetCMD(wrist, claw, arm));
+    operatorController.rightBumper().whileTrue(new ResetCMD(arm, wrist, claw)); 
   }
 
   /**
@@ -126,10 +122,9 @@ public class RobotContainer {
   {
     commandsMap.put("autoBalance", new AutoLevel(driveTrain));
     commandsMap.put("placeLow", new PlaceCMD(arm, wrist, claw));
-    commandsMap.put("armUp", new ArmUpCMD(arm)); 
-    commandsMap.put("armDown", new ArmDownCMD(arm)); 
-    commandsMap.put("resetCMD", new ResetCMD(wrist, claw, arm)); 
-    commandsMap.put("autoArm", new AutoArm(arm, claw, wrist)); 
+    commandsMap.put("placeCMD", new PlaceCMD(arm, wrist, claw)); 
+    commandsMap.put("armUpCMD", new ArmUpCMD(arm)); 
+    commandsMap.put("resetArm", new ResetCMD(arm, wrist, claw));
   }
 
   private SwerveAutoBuilder genrateAutoBuilder()
