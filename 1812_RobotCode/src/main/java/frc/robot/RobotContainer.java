@@ -11,8 +11,10 @@ import frc.robot.commands.CompressCMD;
 import frc.robot.commands.ArmCMDs.ArmDownCMD;
 import frc.robot.commands.ArmCMDs.ArmUpCMD;
 import frc.robot.commands.ArmCMDs.AutoArm;
+import frc.robot.commands.ClawCMDs.AutoClaw;
 import frc.robot.commands.ClawCMDs.ClawCloseCMD;
 import frc.robot.commands.ClawCMDs.ClawToggleCMD;
+import frc.robot.commands.ComplexCMDs.ClawCloseWristUp;
 import frc.robot.commands.ComplexCMDs.PlaceCMD;
 import frc.robot.commands.ComplexCMDs.ResetCMD;
 import frc.robot.commands.DriveCMDs.AutoLevel;
@@ -107,7 +109,8 @@ public class RobotContainer {
     //operator controller configs
     operatorController.a().onTrue(new ClawToggleCMD(claw));
     operatorController.b().onTrue(new WristToggleCMD(wrist));
-    operatorController.y().and(claw::pieceInRange).onTrue(new ClawCloseCMD(claw));
+    operatorController.y().onTrue(new AutoClaw(claw, wrist));
+    operatorController.x().onTrue(new ClawCloseWristUp(claw, wrist));
     operatorController.povUp().onTrue(new ArmUpCMD(arm));
     operatorController.povDown().onTrue(new ResetCMD(wrist, claw, arm));
   }
