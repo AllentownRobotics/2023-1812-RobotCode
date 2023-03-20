@@ -136,7 +136,32 @@ public class DriveTrain extends SubsystemBase {
       SmartDashboard.putString("Orientation", "Robot Oriented");
     }
   }
+  public void slowDrive(double xSpeed, double ySpeed, double rot, boolean fieldRelative) {
+    // Adjust input based on max speed
+    xSpeed *= DriveConstants.MAX_SPEED_MPS / 3;
+    ySpeed *= DriveConstants.MAX_SPEED_MPS / 3;
+    rot *= DriveConstants.MAX_ANGLE_SPEED / 3;
+    
 
+    var swerveModuleStates = DriveConstants.DRIVE_KINEMATICS.toSwerveModuleStates(
+        fieldRelative
+            ? ChassisSpeeds.fromFieldRelativeSpeeds(strafe.calculate(xSpeed), translate.calculate(ySpeed), rot, m_gyro.getRotation2d())
+            : new ChassisSpeeds(xSpeed, ySpeed, rot));
+    SwerveDriveKinematics.desaturateWheelSpeeds(
+        swerveModuleStates, DriveConstants.MAX_SPEED_MPS);
+    m_frontLeft.setDesiredState(swerveModuleStates[0]);
+    m_frontRight.setDesiredState(swerveModuleStates[1]);
+    m_rearLeft.setDesiredState(swerveModuleStates[2]);
+    m_rearRight.setDesiredState(swerveModuleStates[3]);
+    if(fieldRelative)
+    {
+      SmartDashboard.putString("Orientation", "Field Oriented");
+    }
+    else
+    {
+      SmartDashboard.putString("Orientation", "Robot Oriented");
+    }
+  }
   /**
    * Sets the wheels into an X formation to prevent movement.
    */

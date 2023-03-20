@@ -163,8 +163,8 @@ public final class Constants {
   {
     public static final int clawForwardChannel = 5;
     public static final int clawReverseChannel = 4;
-    public static final double sensorDistance = 13;
-    public static final double sensorFluff = 1.0;
+    public static final double sensorDistance = 10.5;
+    public static final double sensorFluff = 0.75;
     public static final double clawCloseSeconds = 0.1;
     public static final double clawOpenSeconds = 0.1;
   }

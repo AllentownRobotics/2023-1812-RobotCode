@@ -23,9 +23,8 @@ public class ResetCMD extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new ClawCloseCMD(claw),
-      new WaitCommand(ClawConstants.clawCloseSeconds),
       new WristUpCMD(wrist),
+      new ClawCloseCMD(claw),
       new ArmDownCMD(arm));
   }
 }

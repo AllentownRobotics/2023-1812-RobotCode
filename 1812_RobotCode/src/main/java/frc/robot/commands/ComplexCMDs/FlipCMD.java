@@ -4,9 +4,11 @@
 
 package frc.robot.commands.ComplexCMDs;
 
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.Constants.ArmConstants;
 import frc.robot.commands.ClawCMDs.ClawOpenCMD;
-import frc.robot.commands.WristCMDs.WristUpCMD;
+import frc.robot.commands.WristCMDs.WristDownCMD;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.Wrist;
 
@@ -19,7 +21,8 @@ public class FlipCMD extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new WristUpCMD(wrist),
+      new WristDownCMD(wrist),
+      Commands.waitSeconds(0.35),
       new ClawOpenCMD(claw));
   }
 }

@@ -17,7 +17,7 @@
       "isStopPoint": false,
       "stopEvent": {
         "names": [
-          "placeLow"
+          "placeHigh"
         ],
         "executionBehavior": "sequential",
         "waitBehavior": "none",
@@ -26,27 +26,27 @@
     },
     {
       "anchorPoint": {
-        "x": 6.0,
-        "y": 2.75
+        "x": 6.5,
+        "y": 2.769172143046309
       },
       "prevControl": {
-        "x": 5.0,
-        "y": 2.75
+        "x": 5.5,
+        "y": 2.769172143046309
       },
       "nextControl": {
-        "x": 7.0,
-        "y": 2.75
+        "x": 7.5,
+        "y": 2.769172143046309
       },
       "holonomicAngle": 180.0,
       "isReversal": false,
       "velOverride": null,
       "isLocked": false,
-      "isStopPoint": false,
+      "isStopPoint": true,
       "stopEvent": {
         "names": [],
         "executionBehavior": "parallel",
-        "waitBehavior": "none",
-        "waitTime": 0
+        "waitBehavior": "minimum",
+        "waitTime": 2.0
       }
     },
     {

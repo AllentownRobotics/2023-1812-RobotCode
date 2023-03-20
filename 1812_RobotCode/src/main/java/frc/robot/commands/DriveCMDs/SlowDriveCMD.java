@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.subsystems.DriveTrain;
 
-public class DriveCMD extends CommandBase {
+public class SlowDriveCMD extends CommandBase {
  
   private boolean fieldOriented;
     
@@ -18,7 +18,7 @@ public class DriveCMD extends CommandBase {
 
   private CommandXboxController drivecontroller;
 
-  public DriveCMD(CommandXboxController controller, boolean fieldOriented, DriveTrain drive) {
+  public SlowDriveCMD(CommandXboxController controller, boolean fieldOriented, DriveTrain drive) {
       this.drive = drive;
       addRequirements(drive);
 
@@ -28,7 +28,7 @@ public class DriveCMD extends CommandBase {
 
   @Override
   public void execute() {
-      drive.drive(
+      drive.slowDrive(
           MathUtil.applyDeadband(drivecontroller.getLeftY(), 0.3),
           MathUtil.applyDeadband(drivecontroller.getLeftX(), 0.3),
           MathUtil.applyDeadband(-drivecontroller.getRightX(), 0.3),

@@ -12,15 +12,16 @@ import frc.robot.commands.ArmCMDs.ArmDownCMD;
 import frc.robot.commands.ArmCMDs.ArmUpCMD;
 import frc.robot.commands.ArmCMDs.AutoArm;
 import frc.robot.commands.ClawCMDs.AutoClaw;
-import frc.robot.commands.ClawCMDs.ClawCloseCMD;
 import frc.robot.commands.ClawCMDs.ClawToggleCMD;
 import frc.robot.commands.ComplexCMDs.ClawCloseWristUp;
-import frc.robot.commands.ComplexCMDs.LimeLightOn;
+import frc.robot.commands.ComplexCMDs.FlipCMD;
 import frc.robot.commands.ComplexCMDs.PlaceCMD;
+import frc.robot.commands.ComplexCMDs.PlaceHighCMD;
 import frc.robot.commands.ComplexCMDs.ResetCMD;
 import frc.robot.commands.DriveCMDs.AutoLevel;
 import frc.robot.commands.DriveCMDs.DriveCMD;
 import frc.robot.commands.DriveCMDs.PseudoNodeTargeting;
+import frc.robot.commands.DriveCMDs.SlowDriveCMD;
 import frc.robot.commands.WristCMDs.WristToggleCMD;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Claw;
@@ -77,12 +78,21 @@ public class RobotContainer {
     compressor.setDefaultCommand(new CompressCMD(compressor));
    
     //chooser
-    chooser.setDefaultOption("Mid", autoBuilder.fullAuto(PathPlanner.loadPathGroup("Mid", 3.0, 3.0)));
-    chooser.addOption("Right", autoBuilder.fullAuto(PathPlanner.loadPathGroup("Right", 3.0, 3.0)));
-    chooser.addOption("Left", autoBuilder.fullAuto(PathPlanner.loadPathGroup("Left", 3.0, 3.0)));
-    chooser.addOption("placeMidRight", autoBuilder.fullAuto(PathPlanner.loadPathGroup("placeMidRight", 3.0, 3.0)));
-    chooser.addOption("PlaceMidLeft", autoBuilder.fullAuto(PathPlanner.loadPathGroup("PlaceMidLeft",3.0 , 3.0)));
-    chooser.addOption("placeMidBalance", autoBuilder.fullAuto(PathPlanner.loadPathGroup("placeMidBalance", 3.0, 3.0)));
+    chooser.setDefaultOption("CenterLow", autoBuilder.fullAuto(PathPlanner.loadPathGroup("CenterLow", 3.0, 3.0)));
+    chooser.addOption("RightLow", autoBuilder.fullAuto(PathPlanner.loadPathGroup("RightLow", 3.0, 3.0)));
+    chooser.addOption("LeftLow", autoBuilder.fullAuto(PathPlanner.loadPathGroup("LeftLow", 3.0, 3.0)));
+    //mid autos 
+    chooser.addOption("RightMid", autoBuilder.fullAuto(PathPlanner.loadPathGroup("RightMid", 3.0, 3.0)));
+    chooser.addOption("LeftMid", autoBuilder.fullAuto(PathPlanner.loadPathGroup("LeftMid",3.0 , 3.0)));
+    chooser.addOption("CenterMid", autoBuilder.fullAuto(PathPlanner.loadPathGroup("CenterMid", 3.0, 3.0)));
+    //mid autos 
+    chooser.addOption("RightHigh", autoBuilder.fullAuto(PathPlanner.loadPathGroup("RightHigh", 3.0, 3.0)));
+    chooser.addOption("LeftHigh", autoBuilder.fullAuto(PathPlanner.loadPathGroup("LeftHigh",3.0 , 3.0)));
+    chooser.addOption("CenterHigh", autoBuilder.fullAuto(PathPlanner.loadPathGroup("CenterHigh", 3.0, 3.0)));
+    ///Two Piece autos
+    chooser.addOption("LeftHighLow", autoBuilder.fullAuto(PathPlanner.loadPathGroup("LeftHighLow", 3.0, 3.0)));
+    chooser.addOption("SpinTwoPiece", autoBuilder.fullAuto(PathPlanner.loadPathGroup("SpinTwoPieceRight", 3.0, 3.0)));
+    chooser.addOption("TwoPieceLeft", autoBuilder.fullAuto(PathPlanner.loadPathGroup("TwoPieceLeft", 0, 0)));
     SmartDashboard.putData("Auto Chooser", chooser);
 
     // Configure the trigger bindings
@@ -102,6 +112,7 @@ public class RobotContainer {
     //drive controller configs
     driverController.x().whileTrue(new AutoLevel(driveTrain));
     driverController.rightBumper().whileTrue(new RunCommand(() -> driveTrain.setX(), driveTrain));
+    driverController.leftBumper().whileTrue(new SlowDriveCMD(driverController, true, driveTrain));
     driverController.start().onTrue(new InstantCommand(() -> driveTrain.zeroHeading(), driveTrain));
     driverController.povUp().onTrue(limelight.April2DTracking());
     driverController.povDown().onTrue(limelight.TapeTracking());
@@ -110,11 +121,14 @@ public class RobotContainer {
     //operator controller configs
     operatorController.a().onTrue(new ClawToggleCMD(claw));
     operatorController.b().onTrue(new WristToggleCMD(wrist));
-    operatorController.y().onTrue(new AutoClaw(claw, wrist));
+    
+    operatorController.y().whileTrue(new AutoClaw(claw, wrist));
     operatorController.x().onTrue(new ClawCloseWristUp(claw, wrist));
-    operatorController.rightBumper().whileTrue(new LimeLightOn(limelight));
     operatorController.povUp().onTrue(new ArmUpCMD(arm));
     operatorController.povDown().onTrue(new ResetCMD(wrist, claw, arm));
+    operatorController.rightBumper().onTrue(new PlaceCMD(arm, wrist, claw));
+    operatorController.leftBumper().onTrue(new FlipCMD(wrist, claw));
+    
   }
 
   /**
@@ -135,6 +149,9 @@ public class RobotContainer {
     commandsMap.put("armDown", new ArmDownCMD(arm)); 
     commandsMap.put("resetCMD", new ResetCMD(wrist, claw, arm)); 
     commandsMap.put("autoArm", new AutoArm(arm, claw, wrist)); 
+    commandsMap.put("autoClaw", new AutoClaw(claw, wrist));
+    commandsMap.put("flip", new FlipCMD(wrist, claw));
+    commandsMap.put("placeHigh", new PlaceHighCMD(arm, wrist, claw));
   }
 
   private SwerveAutoBuilder genrateAutoBuilder()

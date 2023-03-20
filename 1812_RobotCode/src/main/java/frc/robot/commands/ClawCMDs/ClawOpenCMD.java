@@ -15,6 +15,7 @@ public class ClawOpenCMD extends InstantCommand {
   private Claw clawSubsystem;
   public ClawOpenCMD(Claw clawSubsystem) {
     this.clawSubsystem = clawSubsystem;
+  
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(clawSubsystem);
   }
@@ -23,5 +24,6 @@ public class ClawOpenCMD extends InstantCommand {
   @Override
   public void initialize() {
     clawSubsystem.setClaw(Value.kReverse);
+  
   }
 }

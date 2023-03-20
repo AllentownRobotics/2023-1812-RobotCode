@@ -4,9 +4,12 @@
 
 package frc.robot.commands.ComplexCMDs;
 
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.ClawCMDs.ClawCloseCMD;
 import frc.robot.commands.ClawCMDs.ClawOpenCMD;
 import frc.robot.commands.WristCMDs.WristDownCMD;
+import frc.robot.commands.WristCMDs.WristUpCMD;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.Wrist;
@@ -21,6 +24,10 @@ public class PlaceCMD extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new WristDownCMD(wrist),
-      new ClawOpenCMD(claw));
+      Commands.waitSeconds(0.5),
+      new ClawOpenCMD(claw),
+      Commands.waitSeconds(0.5),
+      new WristUpCMD(wrist), 
+      new ClawCloseCMD(claw));
   }
 }
