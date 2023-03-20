@@ -6,7 +6,7 @@ package frc.robot.commands.ComplexCMDs;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import frc.robot.Constants.ClawConstants;
+import frc.robot.Constants.WristConstants;
 import frc.robot.commands.ArmCMDs.ArmDownCMD;
 import frc.robot.commands.ClawCMDs.ClawCloseCMD;
 import frc.robot.commands.WristCMDs.WristUpCMD;
@@ -19,11 +19,17 @@ import frc.robot.subsystems.Wrist;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class ResetCMD extends SequentialCommandGroup {
   /** Creates a new PlaceCMD. */
-  public ResetCMD(Wrist wrist, Claw claw, Arm arm) {
+  public ResetCMD(Arm arm, Wrist wrist, Claw claw) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
+<<<<<<< HEAD
       new WristUpCMD(wrist),
+=======
+      new ArmDownCMD(arm), 
+      new WristUpCMD(wrist),
+      new WaitCommand(WristConstants.wristOutSeconds),
+>>>>>>> b596ebfb748c2550dc28ae8c26dc07c5380a42b7
       new ClawCloseCMD(claw),
       new ArmDownCMD(arm));
   }
