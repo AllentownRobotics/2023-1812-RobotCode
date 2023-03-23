@@ -30,13 +30,8 @@ public class AutoArm extends SequentialCommandGroup {
     new WristDownCMD(wrist), 
     Commands.waitSeconds(0.75),
     new ClawOpenCMD(claw), 
-<<<<<<< HEAD
     Commands.waitSeconds(1), 
     new ResetCMD(wrist, claw, arm)
-=======
-    Commands.waitSeconds(ClawConstants.clawOpenSeconds), 
-    new ResetCMD(arm, wrist, claw)
->>>>>>> b596ebfb748c2550dc28ae8c26dc07c5380a42b7
     
     );
   }

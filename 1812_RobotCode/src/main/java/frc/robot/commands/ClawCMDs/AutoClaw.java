@@ -13,20 +13,19 @@ import frc.robot.commands.WristCMDs.WristUpCMD;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.Wrist;
 
-// NOTE:  Consider using this command inline, rather than writing a subclass.  For more
-// information, see:
-// https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class AutoClaw extends SequentialCommandGroup {
-  /** Creates a new AutoClaw. */
+
   public AutoClaw(Claw claw, Wrist wrist) {
-    // Add your commands in the addCommands() call, e.g.
-    // addCommands(new FooCommand(), new BarCommand());
+  
     addCommands(
       new WristDownCMD(wrist),
       Commands.waitSeconds(WristConstants.wristOutSeconds),
       new ClawOpenCMD(claw),
+      new RunCollectorCMD(claw),
       Commands.waitSeconds(.2),
       new WaitUntilCommand(claw::pieceInRange),
+      new StopCollectorCMD(claw),
+      Commands.waitSeconds(0.5),
       new ClawCloseCMD(claw), 
       Commands.waitSeconds(0.25),
       new WristUpCMD(wrist));

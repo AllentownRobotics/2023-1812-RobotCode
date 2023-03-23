@@ -167,5 +167,6 @@ public final class Constants {
     public static final double sensorFluff = 0.75;
     public static final double clawCloseSeconds = 0.1;
     public static final double clawOpenSeconds = 0.1;
+    public static final double collectMotorSpeed = 0.5; 
   }
 }

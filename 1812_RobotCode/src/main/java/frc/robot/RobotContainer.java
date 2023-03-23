@@ -8,14 +8,11 @@ import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.CompressCMD;
+import frc.robot.commands.ArmCMDs.ArmDownCMD;
 import frc.robot.commands.ArmCMDs.ArmToggleCMD;
 import frc.robot.commands.ArmCMDs.ArmUpCMD;
-<<<<<<< HEAD
 import frc.robot.commands.ArmCMDs.AutoArm;
 import frc.robot.commands.ClawCMDs.AutoClaw;
-=======
-import frc.robot.commands.ClawCMDs.ClawCloseCMD;
->>>>>>> b596ebfb748c2550dc28ae8c26dc07c5380a42b7
 import frc.robot.commands.ClawCMDs.ClawToggleCMD;
 import frc.robot.commands.ComplexCMDs.ClawCloseWristUp;
 import frc.robot.commands.ComplexCMDs.FlipCMD;
@@ -79,7 +76,6 @@ public class RobotContainer {
     driveTrain.setDefaultCommand(new DriveCMD(driverController, true, driveTrain));
     compressor.setDefaultCommand(new CompressCMD(compressor));
     //chooser
-<<<<<<< HEAD
     chooser.setDefaultOption("CenterLow", autoBuilder.fullAuto(PathPlanner.loadPathGroup("CenterLow", 3.0, 3.0)));
     chooser.addOption("RightLow", autoBuilder.fullAuto(PathPlanner.loadPathGroup("RightLow", 3.0, 3.0)));
     chooser.addOption("LeftLow", autoBuilder.fullAuto(PathPlanner.loadPathGroup("LeftLow", 3.0, 3.0)));
@@ -95,13 +91,6 @@ public class RobotContainer {
     chooser.addOption("LeftHighLow", autoBuilder.fullAuto(PathPlanner.loadPathGroup("LeftHighLow", 3.0, 3.0)));
     chooser.addOption("SpinTwoPiece", autoBuilder.fullAuto(PathPlanner.loadPathGroup("SpinTwoPieceRight", 3.0, 3.0)));
     chooser.addOption("TwoPieceLeft", autoBuilder.fullAuto(PathPlanner.loadPathGroup("TwoPieceLeft", 0, 0)));
-=======
-    chooser.setDefaultOption("Mid", autoBuilder.fullAuto(PathPlanner.loadPathGroup("Mid", 3.0, 3.0)));
-    chooser.addOption("Right", autoBuilder.fullAuto(PathPlanner.loadPathGroup("Right", 3.0, 3.0)));
-    chooser.addOption("Left", autoBuilder.fullAuto(PathPlanner.loadPathGroup("Left", 3.0, 3.0)));
-    chooser.addOption("placeMidLeft", autoBuilder.fullAuto(PathPlanner.loadPathGroup("PlaceMidLeft", 3.0, 3.0))); 
-    chooser.addOption("placeMidRight", autoBuilder.fullAuto(PathPlanner.loadPathGroup("PlaceMidRight", 3.0, 3.0))); 
->>>>>>> b596ebfb748c2550dc28ae8c26dc07c5380a42b7
     SmartDashboard.putData("Auto Chooser", chooser);
 
     // Configure the trigger bindings
@@ -130,7 +119,6 @@ public class RobotContainer {
     //operator controller configs
     operatorController.a().onTrue(new ArmToggleCMD(arm));
     operatorController.b().onTrue(new WristToggleCMD(wrist));
-<<<<<<< HEAD
     
     operatorController.y().whileTrue(new AutoClaw(claw, wrist));
     operatorController.x().onTrue(new ClawCloseWristUp(claw, wrist));
@@ -139,12 +127,6 @@ public class RobotContainer {
     operatorController.rightBumper().onTrue(new PlaceCMD(arm, wrist, claw));
     operatorController.leftBumper().onTrue(new FlipCMD(wrist, claw));
     
-=======
-    operatorController.x().onTrue(new ClawToggleCMD(claw));
-
-    operatorController.y().and(claw::pieceInRange).onTrue(new ClawCloseCMD(claw));
-    operatorController.rightBumper().whileTrue(new ResetCMD(arm, wrist, claw)); 
->>>>>>> b596ebfb748c2550dc28ae8c26dc07c5380a42b7
   }
 
   /**
@@ -161,7 +143,6 @@ public class RobotContainer {
   {
     commandsMap.put("autoBalance", new AutoLevel(driveTrain));
     commandsMap.put("placeLow", new PlaceCMD(arm, wrist, claw));
-<<<<<<< HEAD
     commandsMap.put("armUp", new ArmUpCMD(arm)); 
     commandsMap.put("armDown", new ArmDownCMD(arm)); 
     commandsMap.put("resetCMD", new ResetCMD(wrist, claw, arm)); 
@@ -169,11 +150,6 @@ public class RobotContainer {
     commandsMap.put("autoClaw", new AutoClaw(claw, wrist));
     commandsMap.put("flip", new FlipCMD(wrist, claw));
     commandsMap.put("placeHigh", new PlaceHighCMD(arm, wrist, claw));
-=======
-    commandsMap.put("placeCMD", new PlaceCMD(arm, wrist, claw)); 
-    commandsMap.put("armUpCMD", new ArmUpCMD(arm)); 
-    commandsMap.put("resetArm", new ResetCMD(arm, wrist, claw));
->>>>>>> b596ebfb748c2550dc28ae8c26dc07c5380a42b7
   }
 
   private SwerveAutoBuilder genrateAutoBuilder()
