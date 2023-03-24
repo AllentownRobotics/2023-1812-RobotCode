@@ -7,7 +7,6 @@ package frc.robot.commands.ClawCMDs;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
-import frc.robot.Constants.WristConstants;
 import frc.robot.commands.WristCMDs.WristDownCMD;
 import frc.robot.commands.WristCMDs.WristUpCMD;
 import frc.robot.subsystems.Claw;
@@ -23,12 +22,11 @@ public class AutoClaw extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new WristDownCMD(wrist),
-      Commands.waitSeconds(WristConstants.wristOutSeconds),
+      Commands.waitSeconds(.5),
       new ClawOpenCMD(claw),
       Commands.waitSeconds(.2),
       new WaitUntilCommand(claw::pieceInRange),
       new ClawCloseCMD(claw), 
-      Commands.waitSeconds(0.25),
       new WristUpCMD(wrist));
   }
 }
