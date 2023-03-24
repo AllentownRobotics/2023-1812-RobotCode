@@ -152,10 +152,19 @@ public final class Constants {
   //Wrist Constants
   public static class WristConstants
   {
-    public static final int wristForwardChannel = 3;
-    public static final int wristReverseChannel = 2;
-    public static final double wristOutSeconds = .75;
-    public static final double wristInSeconds = 1.3;
+    public static final int wristMotorID = 10;
+    public static final int wristP = 10;
+    public static final int wristI = 10;
+    public static final int wristD = 10;
+    public static final double wristOutputMax = 0.5;
+    public static final double wristOutputMin = -0.5;
+
+    public static final double wristUpDegrees = 0.0;
+    public static final double wristLowDegrees = 0.0;
+    public static final double wristShelfDegrees = 0.0;
+    public static final double wristHighDegrees = 0.0;
+
+    public static final double wristAngleAllowance = 5.0;
   }
 
   //Claw Constants
@@ -163,10 +172,13 @@ public final class Constants {
   {
     public static final int clawForwardChannel = 5;
     public static final int clawReverseChannel = 4;
-    public static final double sensorDistance = 10.5;
-    public static final double sensorFluff = 0.75;
+    public static final double sensorCloseDistance = 10.5;
+    public static final double sensorCloseAllowance = 0.75;
+    public static final double sensorCollectedDistance = 10.5;
+    public static final double sensorCollectedAllowance = 0.75;
     public static final double clawCloseSeconds = 0.1;
     public static final double clawOpenSeconds = 0.1;
-    public static final double collectMotorSpeed = 0.5; 
+    public static final int rightClawMotorID = 11;
+    public static final int leftClawMotorID = 12;
   }
 }

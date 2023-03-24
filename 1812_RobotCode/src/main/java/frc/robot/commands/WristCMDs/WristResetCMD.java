@@ -4,16 +4,16 @@
 
 package frc.robot.commands.WristCMDs;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import frc.robot.Constants.WristConstants;
 import frc.robot.subsystems.Wrist;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class WristDownCMD extends InstantCommand {
+public class WristResetCMD extends InstantCommand {
   private Wrist wristSubsystem;
-  public WristDownCMD(Wrist wristSubsystem) {
+  public WristResetCMD(Wrist wristSubsystem) {
     this.wristSubsystem = wristSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(wristSubsystem);
@@ -22,6 +22,6 @@ public class WristDownCMD extends InstantCommand {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    wristSubsystem.setWrist(Value.kReverse);
+    wristSubsystem.setWrist(WristConstants.wristUpDegrees);
   }
 }

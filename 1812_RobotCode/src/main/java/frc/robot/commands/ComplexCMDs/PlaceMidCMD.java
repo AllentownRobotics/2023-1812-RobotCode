@@ -2,16 +2,12 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.ArmCMDs;
+package frc.robot.commands.ComplexCMDs;
 
-import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.Constants.ArmConstants;
-import frc.robot.Constants.ClawConstants;
-import frc.robot.Constants.WristConstants;
+import frc.robot.commands.ArmCMDs.ArmUpCMD;
 import frc.robot.commands.ClawCMDs.ClawOpenCMD;
-import frc.robot.commands.ComplexCMDs.ResetCMD;
-import frc.robot.commands.WristCMDs.WristDownCMD;
+import frc.robot.commands.WristCMDs.WristLowCMD;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.Wrist;
@@ -19,20 +15,14 @@ import frc.robot.subsystems.Wrist;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class AutoArm extends SequentialCommandGroup {
-  /** Creates a new AutoArm. */
-  public AutoArm(Arm arm, Claw claw, Wrist wrist) {
+public class PlaceMidCMD extends SequentialCommandGroup {
+  /** Creates a new PlaceCMD. */
+  public PlaceMidCMD(Arm arm, Wrist wrist, Claw claw) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-    new ArmUpCMD(arm), 
-    Commands.waitSeconds(ArmConstants.armUpSeconds), 
-    new WristDownCMD(wrist), 
-    Commands.waitSeconds(0.75),
-    new ClawOpenCMD(claw), 
-    Commands.waitSeconds(1), 
-    new ResetCMD(wrist, claw, arm)
-    
-    );
+      new ArmUpCMD(arm),
+      new WristLowCMD(wrist),
+      new ClawOpenCMD(claw));
   }
 }

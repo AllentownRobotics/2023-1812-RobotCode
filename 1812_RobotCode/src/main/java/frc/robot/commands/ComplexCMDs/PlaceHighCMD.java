@@ -8,6 +8,8 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants.ArmConstants;
 import frc.robot.commands.ArmCMDs.ArmUpCMD;
+import frc.robot.commands.ClawCMDs.ClawMotorsCMD;
+import frc.robot.commands.WristCMDs.WristHighCMD;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.Wrist;
@@ -23,8 +25,7 @@ public class PlaceHighCMD extends SequentialCommandGroup {
     addCommands(
       new ArmUpCMD(arm),
       Commands.waitSeconds(ArmConstants.armUpSeconds),
-      new FlipCMD(wrist, claw),
-      Commands.waitSeconds(1),
-      new ResetCMD(wrist, claw, arm));
+      new WristHighCMD(wrist),
+      new ClawMotorsCMD(claw, 1));
   }
 }

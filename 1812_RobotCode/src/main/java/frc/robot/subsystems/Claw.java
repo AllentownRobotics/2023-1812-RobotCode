@@ -14,6 +14,7 @@ import com.revrobotics.Rev2mDistanceSensor.Unit;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ClawConstants;
@@ -22,7 +23,9 @@ import frc.robot.Constants.GlobalConstants;
 public class Claw extends SubsystemBase {
   private DoubleSolenoid clawPiston;
   public Rev2mDistanceSensor distanceSensor;
-  private CANSparkMax collectMotor; 
+  private CANSparkMax rightClawMotor; 
+  private CANSparkMax leftClawMotor; 
+  private MotorControllerGroup clawMotors;
   //private Rev2mDistanceSensor distanceSensor;
   /** Creates a new Arm. */
   public Claw() {
@@ -34,9 +37,15 @@ public class Claw extends SubsystemBase {
     distanceSensor.setEnabled(true);
     distanceSensor.setDistanceUnits(Unit.kInches);
     
-    collectMotor = new CANSparkMax(0, MotorType.kBrushless);
-    collectMotor.burnFlash(); 
-    collectMotor.setIdleMode(IdleMode.kBrake); 
+    rightClawMotor = new CANSparkMax(ClawConstants.rightClawMotorID, MotorType.kBrushless);
+    leftClawMotor = new CANSparkMax(ClawConstants.leftClawMotorID, MotorType.kBrushless);
+
+    rightClawMotor.setIdleMode(IdleMode.kBrake); 
+    leftClawMotor.setIdleMode(IdleMode.kBrake); 
+
+    leftClawMotor.setInverted(true);
+
+    clawMotors = new MotorControllerGroup(rightClawMotor, leftClawMotor);
   }
   @Override
   public void periodic() {
@@ -55,12 +64,14 @@ public class Claw extends SubsystemBase {
   }
   public boolean pieceInRange()
   {
-    return Math.abs(distanceSensor.getRange()-ClawConstants.sensorDistance)<ClawConstants.sensorFluff;
+    return Math.abs(distanceSensor.getRange()-ClawConstants.sensorCloseDistance)<ClawConstants.sensorCloseAllowance;
   }
-  public void runCollector(){
-      collectMotor.set(ClawConstants.collectMotorSpeed); 
+  public boolean pieceInClaw()
+  {
+    return Math.abs(distanceSensor.getRange()-ClawConstants.sensorCollectedDistance)<ClawConstants.sensorCollectedAllowance;
   }
-  public void stopCollector(){
-    collectMotor.set(0); 
+  public void setClawMotors(double speed)
+  {
+    clawMotors.set(speed);
   }
 }
