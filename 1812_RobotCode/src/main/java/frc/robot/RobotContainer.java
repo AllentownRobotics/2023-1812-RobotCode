@@ -73,8 +73,8 @@ public class RobotContainer {
     driveTrain.setDefaultCommand(new DriveCMD(driverController, true, driveTrain));
     compressor.setDefaultCommand(new CompressCMD(compressor));
     //chooser
-    chooser.setDefaultOption("CenterLow", autoBuilder.fullAuto(PathPlanner.loadPathGroup("CenterLow", 4.0, 4.0)));
     //low autos
+    chooser.setDefaultOption("CenterLow", autoBuilder.fullAuto(PathPlanner.loadPathGroup("CenterLow", 4.0, 4.0)));
     chooser.addOption("WallLow", autoBuilder.fullAuto(PathPlanner.loadPathGroup("WallLow", 4.0, 4.0)));
     chooser.addOption("LoadingLow", autoBuilder.fullAuto(PathPlanner.loadPathGroup("LoadingLow", 4.0, 4.0)));
     //mid autos 
