@@ -155,7 +155,7 @@ public final class Constants {
     public static final int wristForwardChannel = 5;
     public static final int wristReverseChannel = 4;
     public static final double wristOutSeconds = .75;
-    public static final double wristInSeconds = 1.3;
+    public static final double wristInSeconds = .8;
   }
 
   //Claw Constants
@@ -164,7 +164,7 @@ public final class Constants {
     public static final int clawForwardChannel = 3;
     public static final int clawReverseChannel = 2;
     public static final double sensorDistance = 12.5;
-    public static final double sensorAllowance = 0.5;
+    public static final double sensorAllowance = 1.0;
     public static final double clawCloseSeconds = 0.1;
     public static final double clawOpenSeconds = 0.1;
   }

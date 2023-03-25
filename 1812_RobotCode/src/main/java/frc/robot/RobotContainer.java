@@ -8,13 +8,12 @@ import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.CompressCMD;
-import frc.robot.commands.ArmCMDs.ArmDownCMD;
 import frc.robot.commands.ArmCMDs.ArmToggleCMD;
 import frc.robot.commands.ClawCMDs.AutoClaw;
 import frc.robot.commands.ClawCMDs.ClawToggleCMD;
 import frc.robot.commands.ComplexCMDs.PlaceHighCMD;
-import frc.robot.commands.ComplexCMDs.PlaceLowCMD;
-import frc.robot.commands.ComplexCMDs.PlaceMidCMD;
+import frc.robot.commands.ComplexCMDs.*;
+import frc.robot.commands.AutoCMDs.*;
 import frc.robot.commands.ComplexCMDs.ResetCMD;
 import frc.robot.commands.DriveCMDs.AutoLevel;
 import frc.robot.commands.DriveCMDs.DriveCMD;
@@ -116,10 +115,10 @@ public class RobotContainer {
     driverController.leftTrigger().whileTrue(new PseudoNodeTargeting(driveTrain, driverController));
 
     //operator controller configs
-    operatorController.b().whileTrue(new AutoClaw(claw, wrist));
+    operatorController.x().whileTrue(new AutoClaw(claw, wrist));
     operatorController.a().onTrue(new ClawToggleCMD(claw));
     operatorController.y().onTrue(new ArmToggleCMD(arm));
-    operatorController.x().onTrue(new WristToggleCMD(wrist));
+    operatorController.b().onTrue(new WristToggleCMD(wrist));
 
     operatorController.povUp().onTrue(new PlaceHighCMD(arm, wrist, claw));
     operatorController.povDown().onTrue(new ResetCMD(wrist, claw, arm));
@@ -140,11 +139,9 @@ public class RobotContainer {
   private void populateCommandMap()
   {
     commandsMap.put("autoBalance", new AutoLevel(driveTrain));
-    commandsMap.put("resetCMD", new ResetCMD(wrist, claw, arm)); 
-    commandsMap.put("placeLow", new PlaceLowCMD(arm, wrist, claw));
-    commandsMap.put("placeMid", new PlaceMidCMD(arm, wrist, claw));
-    commandsMap.put("placeHigh", new PlaceHighCMD(arm, wrist, claw));
-    commandsMap.put("armDown", new ArmDownCMD(arm)); 
+    commandsMap.put("placeLow", new PlaceLowResetCMD(arm, wrist, claw));
+    commandsMap.put("placeMid", new PlaceMidResetCMD(arm, wrist, claw));
+    commandsMap.put("placeHigh", new PlaceHighResetCMD(arm, wrist, claw));
     commandsMap.put("autoClaw", new AutoClaw(claw, wrist));
   }
 
