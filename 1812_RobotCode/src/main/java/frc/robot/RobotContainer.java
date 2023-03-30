@@ -10,6 +10,7 @@ import frc.robot.Constants.OIConstants;
 import frc.robot.commands.CompressCMD;
 import frc.robot.commands.ArmCMDs.ArmToggleCMD;
 import frc.robot.commands.ClawCMDs.AutoClaw;
+import frc.robot.commands.ClawCMDs.ClawCloseCMD;
 import frc.robot.commands.ClawCMDs.ClawToggleCMD;
 import frc.robot.commands.ComplexCMDs.PlaceHighCMD;
 import frc.robot.commands.ComplexCMDs.*;
@@ -32,7 +33,6 @@ import java.util.HashMap;
 import com.pathplanner.lib.PathPlanner;
 import com.pathplanner.lib.auto.PIDConstants;
 import com.pathplanner.lib.auto.SwerveAutoBuilder;
-
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -85,10 +85,11 @@ public class RobotContainer {
     chooser.addOption("LoadingHigh", autoBuilder.fullAuto(PathPlanner.loadPathGroup("LoadingHigh",4.0, 4.0)));
     chooser.addOption("CenterHigh", autoBuilder.fullAuto(PathPlanner.loadPathGroup("CenterHigh", 4.0, 4.0)));
     //Two Piece autos
-    chooser.addOption("LoadingHighLow", autoBuilder.fullAuto(PathPlanner.loadPathGroup("LoadingHighLow", 4.0, 4.0)));
-    chooser.addOption("LoadingHighLowEngage", autoBuilder.fullAuto(PathPlanner.loadPathGroup("LoadingHighLowEngage", 4.0, 4.0)));
+    chooser.addOption("LoadingHighLow", autoBuilder.fullAuto(PathPlanner.loadPathGroup("LoadingHighLow", 4.0, 3.0)));
+    chooser.addOption("LoadingLowLow", autoBuilder.fullAuto(PathPlanner.loadPathGroup("LoadingLowLow", 4.0, 3.0)));
+    chooser.addOption("LoadingHighLowEngage", autoBuilder.fullAuto(PathPlanner.loadPathGroup("LoadingHighLowEngage", 4.0, 3.0)));
     //Three piece auto frick yea bb
-    chooser.addOption("LoadingThreePieceLow", autoBuilder.fullAuto(PathPlanner.loadPathGroup("LoadingThreePieceLow", 4.0, 4.0)));
+    chooser.addOption("LoadingThreePieceLow", autoBuilder.fullAuto(PathPlanner.loadPathGroup("LoadingThreePieceLow", 4.0, 3.0)));
     SmartDashboard.putData("Auto Chooser", chooser);
 
     // Configure the trigger bindings
@@ -143,6 +144,7 @@ public class RobotContainer {
     commandsMap.put("placeMid", new PlaceMidResetCMD(arm, wrist, claw));
     commandsMap.put("placeHigh", new PlaceHighResetCMD(arm, wrist, claw));
     commandsMap.put("autoClaw", new AutoClaw(claw, wrist));
+    commandsMap.put("ClawClose", new ClawCloseCMD(claw) );
   }
 
   private SwerveAutoBuilder genrateAutoBuilder()

@@ -127,14 +127,6 @@ public class DriveTrain extends SubsystemBase {
     m_frontRight.setDesiredState(swerveModuleStates[1]);
     m_rearLeft.setDesiredState(swerveModuleStates[2]);
     m_rearRight.setDesiredState(swerveModuleStates[3]);
-    if(fieldRelative)
-    {
-      SmartDashboard.putString("Orientation", "Field Oriented");
-    }
-    else
-    {
-      SmartDashboard.putString("Orientation", "Robot Oriented");
-    }
   }
   public void slowDrive(double xSpeed, double ySpeed, double rot, boolean fieldRelative) {
     // Adjust input based on max speed

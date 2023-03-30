@@ -22,9 +22,9 @@ public class AutoClaw extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new WristDownCMD(wrist),
-      Commands.waitSeconds(.5),
+      Commands.waitSeconds(.25),
       new ClawOpenCMD(claw),
-      Commands.waitSeconds(.2),
+      Commands.waitSeconds(1),
       new WaitUntilCommand(claw::pieceInRange),
       new ClawCloseCMD(claw), 
       new WristUpCMD(wrist));

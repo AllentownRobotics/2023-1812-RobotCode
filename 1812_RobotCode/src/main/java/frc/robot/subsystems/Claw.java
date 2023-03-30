@@ -46,6 +46,6 @@ public class Claw extends SubsystemBase {
   }
   public boolean pieceInRange()
   {
-    return Math.abs(distanceSensor.getRange()-ClawConstants.sensorDistance)<ClawConstants.sensorAllowance;
+    return distanceSensor.getRange()<ClawConstants.sensorDistance&&distanceSensor.getRange()!=-1;
   }
 }

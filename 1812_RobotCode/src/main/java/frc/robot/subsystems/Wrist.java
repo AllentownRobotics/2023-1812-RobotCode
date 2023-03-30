@@ -12,24 +12,16 @@ import frc.robot.Constants.GlobalConstants;
 import frc.robot.Constants.WristConstants;
 
 public class Wrist extends SubsystemBase {
-  private DoubleSolenoid wristPiston;
+  private CANSparkMAX wristMotor;
+  private SparkMAXPIDController wristPID; 
   /** Creates a new Arm. */
   public Wrist() {
-    wristPiston = new DoubleSolenoid(GlobalConstants.PNEUMATICS_ID, PneumaticsModuleType.REVPH, WristConstants.wristForwardChannel, WristConstants.wristReverseChannel);
-
-    wristPiston.set(Value.kForward);
+  
   }
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
   }
 
-  public void setWrist(Value value)
-  {
-    wristPiston.set(value);
-  }
-  public void toggleWrist()
-  {
-    wristPiston.toggle();
-  }
+
 }

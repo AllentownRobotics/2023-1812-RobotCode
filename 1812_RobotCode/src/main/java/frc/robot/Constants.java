@@ -36,7 +36,7 @@ public final class Constants {
   public static final class DriveConstants{
   
   //Drive parameters 
-  public static final double MAX_SPEED_MPS = 4;
+  public static final double MAX_SPEED_MPS = 4.5;
   public static final double MAX_ANGLE_SPEED = 2 * Math.PI; //Radians per sec
   
   //chassis config
@@ -127,7 +127,7 @@ public final class Constants {
   //Auto Constnts 
   public static class AutoConstants{
       
-     public static final double AUTO_MAX_SPEED_MPS = 2;
+      public static final double AUTO_MAX_SPEED_MPS = 2;
       public static final double AUTO_MAX_ACCELERATION_MPS_SQUARED = 2;
       public static final double MAX_ANGULAR_SPEED_RPS = Math.PI;
       public static final double MAX_ANGULAR_SPEED_RPS_SQUARED = Math.PI;
