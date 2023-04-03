@@ -233,6 +233,19 @@ public class Limelight extends SubsystemBase {
       if (table.getEntry("tv").getDouble(0.0) == 1) {
         tv = true;
       } else {tv = false;}
+
+      SmartDashboard.putNumber("X", x);
+      SmartDashboard.putNumber("Y", y);
+
+      SmartDashboard.putBoolean("Target Aquired", tv);
+  
+      SmartDashboard.putNumber("Target Spec X", RoboRelPos[0]);
+      SmartDashboard.putNumber("Target Spec Y", RoboRelPos[1]);
+      SmartDashboard.putNumber("Target Spec Z", RoboRelPos[2]);
+      SmartDashboard.putNumber("Target Spec Roll", RoboRelPos[3]);
+      SmartDashboard.putNumber("Target Spec Pitch", RoboRelPos[4]);
+      SmartDashboard.putNumber("Target Spec Yaw", RoboRelPos[5]);
+
       SmartDashboard.putNumber("Pipeline", currentPipeline);
     } catch (Exception e) {}
   }

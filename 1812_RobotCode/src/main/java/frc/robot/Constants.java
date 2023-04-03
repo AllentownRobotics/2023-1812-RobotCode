@@ -36,7 +36,7 @@ public final class Constants {
   public static final class DriveConstants{
   
   //Drive parameters 
-  public static final double MAX_SPEED_MPS = 4.5;
+  public static final double MAX_SPEED_MPS = 4;
   public static final double MAX_ANGLE_SPEED = 2 * Math.PI; //Radians per sec
   
   //chassis config
@@ -127,7 +127,7 @@ public final class Constants {
   //Auto Constnts 
   public static class AutoConstants{
       
-      public static final double AUTO_MAX_SPEED_MPS = 2;
+     public static final double AUTO_MAX_SPEED_MPS = 2;
       public static final double AUTO_MAX_ACCELERATION_MPS_SQUARED = 2;
       public static final double MAX_ANGULAR_SPEED_RPS = Math.PI;
       public static final double MAX_ANGULAR_SPEED_RPS_SQUARED = Math.PI;
@@ -152,10 +152,20 @@ public final class Constants {
   //Wrist Constants
   public static class WristConstants
   {
-    public static final int wristForwardChannel = 5;
-    public static final int wristReverseChannel = 4;
-    public static final double wristOutSeconds = .75;
-    public static final double wristInSeconds = .8;
+    public static final int wristMotorID = 10;
+    public static final double wristP = 0.004;
+    public static final double wristI = 0.0;
+    public static final double wristD = 0.05;
+    public static final double wristFF = 0.0;
+    public static final double wristOutputMax = 0.4;
+    public static final double wristOutputMin = -0.4;
+
+    public static final double wristUpDegrees = 5;
+    public static final double wristLowDegrees = 135;
+    public static final double wristShelfDegrees = 90;
+    public static final double wristHighDegrees = 30;
+
+    public static final double wristAngleAllowance = 5.0;
   }
 
   //Claw Constants
@@ -163,8 +173,10 @@ public final class Constants {
   {
     public static final int clawForwardChannel = 3;
     public static final int clawReverseChannel = 2;
-    public static final double sensorDistance = 12.5;
-    public static final double sensorAllowance = 1.0;
+    public static final double sensorCloseDistance = 10.5;
+    public static final double sensorCloseAllowance = 0.75;
+    public static final double sensorCollectedDistance = 10.5;
+    public static final double sensorCollectedAllowance = 0.75;
     public static final double clawCloseSeconds = 0.1;
     public static final double clawOpenSeconds = 0.1;
   }

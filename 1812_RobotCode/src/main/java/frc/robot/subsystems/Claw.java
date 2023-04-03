@@ -24,6 +24,7 @@ public class Claw extends SubsystemBase {
   public Claw() {
     clawPiston = new DoubleSolenoid(GlobalConstants.PNEUMATICS_ID, PneumaticsModuleType.REVPH, ClawConstants.clawForwardChannel, ClawConstants.clawReverseChannel);
     clawPiston.set(Value.kForward);
+    
     distanceSensor = new Rev2mDistanceSensor(Port.kOnboard);
     distanceSensor.setAutomaticMode(true);
     distanceSensor.setEnabled(true);
@@ -31,7 +32,7 @@ public class Claw extends SubsystemBase {
   }
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
+
     SmartDashboard.putNumber("Distance", distanceSensor.getRange());
   
   }
@@ -46,6 +47,10 @@ public class Claw extends SubsystemBase {
   }
   public boolean pieceInRange()
   {
-    return distanceSensor.getRange()<ClawConstants.sensorDistance&&distanceSensor.getRange()!=-1;
+    return Math.abs(distanceSensor.getRange()-ClawConstants.sensorCloseDistance)<ClawConstants.sensorCloseAllowance;
+  }
+  public boolean pieceInClaw()
+  {
+    return Math.abs(distanceSensor.getRange()-ClawConstants.sensorCollectedDistance)<ClawConstants.sensorCollectedAllowance;
   }
 }

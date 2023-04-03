@@ -19,9 +19,8 @@ public class FlipCMD extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new WristDownCMD(wrist),
-      Commands.waitSeconds(.25),
-      new ClawOpenCMD(claw)
-    );
+      new WristLowCMD(wrist),
+      Commands.waitSeconds(0.08),
+      new ClawOpenCMD(claw));
   }
 }

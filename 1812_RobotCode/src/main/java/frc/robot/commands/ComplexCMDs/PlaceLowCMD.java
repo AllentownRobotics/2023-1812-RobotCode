@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.ArmCMDs.ArmDownCMD;
 import frc.robot.commands.ClawCMDs.ClawOpenCMD;
-import frc.robot.commands.WristCMDs.WristDownCMD;
+import frc.robot.commands.WristCMDs.WristLowCMD;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.Wrist;
@@ -23,8 +23,8 @@ public class PlaceLowCMD extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new ArmDownCMD(arm),
-      new WristDownCMD(wrist),
-      Commands.waitSeconds(.5),
+      new WristLowCMD(wrist),
+      Commands.waitUntil(wrist::atPlace),
       new ClawOpenCMD(claw));
   }
 }

@@ -11,7 +11,7 @@ import frc.robot.subsystems.DriveTrain;
 public class AutoLevel extends CommandBase {
         
   private DriveTrain s_Swerve;
-  PIDController kLevelingPID = new PIDController(0.03, 0, 0);
+  PIDController kLevelingPID = new PIDController(0.035, 0, 0);
 
   
   public AutoLevel(DriveTrain s_Swerve) {

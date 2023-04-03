@@ -5,14 +5,15 @@
 package frc.robot.commands.WristCMDs;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import frc.robot.Constants.WristConstants;
 import frc.robot.subsystems.Wrist;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class WristToggleCMD extends InstantCommand {
+public class WristShelfCMD extends InstantCommand {
   private Wrist wristSubsystem;
-  public WristToggleCMD(Wrist wristSubsystem) {
+  public WristShelfCMD(Wrist wristSubsystem) {
     this.wristSubsystem = wristSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(wristSubsystem);
@@ -21,6 +22,6 @@ public class WristToggleCMD extends InstantCommand {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    wristSubsystem.toggleWrist();
+    wristSubsystem.setWrist(WristConstants.wristShelfDegrees);
   }
 }

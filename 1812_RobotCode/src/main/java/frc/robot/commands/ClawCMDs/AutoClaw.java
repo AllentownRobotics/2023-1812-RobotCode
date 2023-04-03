@@ -6,27 +6,17 @@ package frc.robot.commands.ClawCMDs;
 
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
-import frc.robot.commands.WristCMDs.WristDownCMD;
-import frc.robot.commands.WristCMDs.WristUpCMD;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.Wrist;
 
-// NOTE:  Consider using this command inline, rather than writing a subclass.  For more
-// information, see:
-// https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class AutoClaw extends SequentialCommandGroup {
-  /** Creates a new AutoClaw. */
+
   public AutoClaw(Claw claw, Wrist wrist) {
-    // Add your commands in the addCommands() call, e.g.
-    // addCommands(new FooCommand(), new BarCommand());
+  
     addCommands(
-      new WristDownCMD(wrist),
-      Commands.waitSeconds(.25),
       new ClawOpenCMD(claw),
-      Commands.waitSeconds(1),
-      new WaitUntilCommand(claw::pieceInRange),
-      new ClawCloseCMD(claw), 
-      new WristUpCMD(wrist));
+      Commands.waitUntil(claw::pieceInRange),
+      new ClawCloseCMD(claw),
+      Commands.waitUntil(claw::pieceInClaw));
   }
 }

@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants.ArmConstants;
 import frc.robot.commands.ArmCMDs.ArmUpCMD;
 import frc.robot.commands.ClawCMDs.ClawOpenCMD;
-import frc.robot.commands.WristCMDs.WristDownCMD;
+import frc.robot.commands.WristCMDs.WristShelfCMD;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.Wrist;
@@ -25,8 +25,8 @@ public class PlaceMidCMD extends SequentialCommandGroup {
     addCommands(
       new ArmUpCMD(arm),
       Commands.waitSeconds(ArmConstants.armUpSeconds),
-      new WristDownCMD(wrist),
-      Commands.waitSeconds(.5),
+      new WristShelfCMD(wrist),
+      Commands.waitUntil(wrist::atPlace),
       new ClawOpenCMD(claw));
   }
 }
