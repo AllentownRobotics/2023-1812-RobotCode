@@ -65,6 +65,7 @@ public SwerveModule(int driveID, int turningID, double chassisAngularOffset) {
   drivePIDController.setD(ModuleConstants.DRIVE_D);
   drivePIDController.setFF(ModuleConstants.DRIVE_FF);
   drivePIDController.setOutputRange(ModuleConstants.DRIVE_MIN_OUTPUT, ModuleConstants.DRIVE_MAX_OUTPUT);
+  drivePIDController.setIZone(.15);
 
   //Set turn motor PID values 
   turningPIDController.setP(ModuleConstants.TURN_P);
@@ -93,7 +94,6 @@ public SwerveModuleState getState(){
 
   return new SwerveModuleState(driveEncoder.getVelocity(), 
         new Rotation2d(turningEncoder.getPosition() - chassisAngularOffset));
-
 }
 
 //returns current position of the module 
@@ -140,5 +140,15 @@ public void setDesiredStateNoOpt(SwerveModuleState desiredState) {
 //zeros all swerve modules encoders 
 public void resetEncoders() {
   driveEncoder.setPosition(0);
+}
+
+public double getWheelVelocity()
+{
+  return driveEncoder.getVelocity();
+}
+
+public double getDesiredVelocity()
+{
+  return desiredState.speedMetersPerSecond;
 }
 }

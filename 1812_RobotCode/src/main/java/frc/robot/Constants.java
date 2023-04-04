@@ -102,8 +102,8 @@ public final class Constants {
       public static final double TURN_ENCODER_POS_MAX_INPUT = TURN_ENCODER_POS_FACTOR; // radians
   
       //drive motor PID
-      public static final double DRIVE_P = 0.04;
-      public static final double DRIVE_I = 0;
+      public static final double DRIVE_P = 0.06;
+      public static final double DRIVE_I = 0.0001;
       public static final double DRIVE_D = 0;
       public static final double DRIVE_FF = 1 / DRIVE_WHEEL_FREE_SPEED_RPS;
       public static final double DRIVE_MIN_OUTPUT = -1;
@@ -173,10 +173,8 @@ public final class Constants {
   {
     public static final int clawForwardChannel = 3;
     public static final int clawReverseChannel = 2;
-    public static final double sensorCloseDistance = 10.5;
+    public static final double sensorCloseDistance = 13.5;
     public static final double sensorCloseAllowance = 0.75;
-    public static final double sensorCollectedDistance = 10.5;
-    public static final double sensorCollectedAllowance = 0.75;
     public static final double clawCloseSeconds = 0.1;
     public static final double clawOpenSeconds = 0.1;
   }

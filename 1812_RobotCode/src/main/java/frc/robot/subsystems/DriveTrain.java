@@ -73,6 +73,8 @@ public class DriveTrain extends SubsystemBase {
             m_rearLeft.getPosition(),
             m_rearRight.getPosition()
         });
+    SmartDashboard.putNumber("velocity", m_frontLeft.getWheelVelocity());
+    SmartDashboard.putNumber("Desired velocity", m_frontLeft.getDesiredVelocity());
   }
 
   /**
