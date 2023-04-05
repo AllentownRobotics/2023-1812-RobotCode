@@ -140,9 +140,9 @@ public class DriveTrain extends SubsystemBase {
   }
   public void slowDrive(double xSpeed, double ySpeed, double rot, boolean fieldRelative) {
     // Adjust input based on max speed
-    xSpeed *= DriveConstants.MAX_SPEED_MPS / 3;
-    ySpeed *= DriveConstants.MAX_SPEED_MPS / 3;
-    rot *= DriveConstants.MAX_ANGLE_SPEED / 3;
+    xSpeed *= DriveConstants.MAX_SPEED_MPS / 4;
+    ySpeed *= DriveConstants.MAX_SPEED_MPS / 4;
+    rot *= DriveConstants.MAX_ANGLE_SPEED / 4;
     
 
     var swerveModuleStates = DriveConstants.DRIVE_KINEMATICS.toSwerveModuleStates(

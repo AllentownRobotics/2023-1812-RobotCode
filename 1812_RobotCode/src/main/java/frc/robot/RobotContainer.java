@@ -25,6 +25,8 @@ import frc.robot.commands.DriveCMDs.DriveCMD;
 import frc.robot.commands.DriveCMDs.PseudoNodeTargeting;
 import frc.robot.commands.DriveCMDs.SlowDriveCMD;
 import frc.robot.commands.WristCMDs.FlipCMD;
+import frc.robot.commands.WristCMDs.WristResetCMD;
+import frc.robot.commands.WristCMDs.WristShelfCMD;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.Compress;
@@ -118,15 +120,11 @@ public class RobotContainer {
     driverController.leftTrigger().whileTrue(new PseudoNodeTargeting(driveTrain, driverController));
 
     //operator controller configs
-    operatorController.x().onTrue(new ArmToggleCMD(arm));
-    operatorController.b().onTrue(new FlipCMD(wrist, claw));
+    operatorController.x().onTrue(new WristResetCMD(wrist));
+    operatorController.b().onTrue(new WristShelfCMD(wrist));
     operatorController.y().whileTrue(new AutoClaw(claw, wrist));
     operatorController.a().onTrue(new ClawToggleCMD(claw));
 
-    /*operatorController.povUp().onTrue(new FlipCMD(wrist, claw));
-    operatorController.povDown().onTrue(new ResetCMD(wrist, claw, arm));
-    operatorController.povLeft().onTrue(new WristLowCMD(wrist));
-    operatorController.povRight().onTrue(new WristShelfCMD(wrist));*/
     operatorController.povUp().onTrue(new PlaceHighCMD(arm, wrist, claw));
     operatorController.povDown().onTrue(new ResetCMD(wrist, claw, arm));
     operatorController.povLeft().onTrue(new PlaceLowCMD(arm, wrist, claw));
