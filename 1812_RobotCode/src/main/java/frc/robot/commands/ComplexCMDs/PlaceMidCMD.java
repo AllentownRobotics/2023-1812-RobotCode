@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants.ArmConstants;
 import frc.robot.commands.ArmCMDs.ArmUpCMD;
-import frc.robot.commands.ClawCMDs.ClawOpenCMD;
 import frc.robot.commands.WristCMDs.WristShelfCMD;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Claw;
