@@ -9,11 +9,12 @@ import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.CompressCMD;
 import frc.robot.commands.ArmCMDs.ArmDownCMD;
+import frc.robot.commands.AutosCMDs.ClawCloseAutoCMD;
+import frc.robot.commands.AutosCMDs.ClawOpenAutoCMD;
 import frc.robot.commands.AutosCMDs.PlaceHighAutoCMD;
 import frc.robot.commands.AutosCMDs.PlaceLowAutoCMD;
 import frc.robot.commands.AutosCMDs.PlaceMidAutoCMD;
 import frc.robot.commands.ClawCMDs.AutoClaw;
-import frc.robot.commands.ClawCMDs.ClawCloseCMD;
 import frc.robot.commands.ClawCMDs.ClawToggleCMD;
 import frc.robot.commands.ComplexCMDs.PlaceHighCMD;
 import frc.robot.commands.ComplexCMDs.PlaceLowCMD;
@@ -81,17 +82,26 @@ public class RobotContainer {
     //low autos
     chooser.addOption("WallLow", autoBuilder.fullAuto(PathPlanner.loadPathGroup("WallLow", 4.0, 4.0)));
     chooser.addOption("LoadingLow", autoBuilder.fullAuto(PathPlanner.loadPathGroup("LoadingLow", 4.0, 4.0)));
+    //divider
+    chooser.addOption("-----Low-----", null);
     //mid autos 
     chooser.addOption("WallMid", autoBuilder.fullAuto(PathPlanner.loadPathGroup("WallMid", 4.0, 4.0)));
     chooser.addOption("LoadingMid", autoBuilder.fullAuto(PathPlanner.loadPathGroup("LoadingMid", 4.0, 4.0)));
     chooser.addOption("CenterMid", autoBuilder.fullAuto(PathPlanner.loadPathGroup("CenterMid", 4.0, 4.0)));
+    //divider
+    chooser.addOption("-----Mid-----", null);
     //high autos 
     chooser.addOption("WallHigh", autoBuilder.fullAuto(PathPlanner.loadPathGroup("WallHigh", 4.0, 4.0)));
     chooser.addOption("LoadingHigh", autoBuilder.fullAuto(PathPlanner.loadPathGroup("LoadingHigh",4.0, 4.0)));
     chooser.addOption("CenterHigh", autoBuilder.fullAuto(PathPlanner.loadPathGroup("CenterHigh", 4.0, 4.0)));
+    //divider
+    chooser.addOption("-----High-----", null);
     //Two Piece autos
-    chooser.addOption("LoadingHighLow", autoBuilder.fullAuto(PathPlanner.loadPathGroup("LoadingHighLow", 3.0, 3.0)));
-    chooser.addOption("1.5 piece", autoBuilder.fullAuto(PathPlanner.loadPathGroup("LoadingHighEngage", 3.0, 3.0)));
+    chooser.addOption("2.25PieceHighLow", autoBuilder.fullAuto(PathPlanner.loadPathGroup("LoadingHighLow", 3.0, 3.0)));
+    chooser.addOption("2.25PieceLowLow", autoBuilder.fullAuto(PathPlanner.loadPathGroup("LoadingLowLow", 3.0, 3.0)));
+    chooser.addOption("2PieceHighLowEngage", autoBuilder.fullAuto(PathPlanner.loadPathGroup("LoadingHighLowEngage", 3.0, 3.0)));
+    chooser.addOption("2PieceLowLowEngage", autoBuilder.fullAuto(PathPlanner.loadPathGroup("LoadingLowLowEngage", 3.0, 3.0)));
+    chooser.addOption("1.5PieceEngage", autoBuilder.fullAuto(PathPlanner.loadPathGroup("LoadingHighEngage", 3.0, 3.0)));
     SmartDashboard.putData("Auto Chooser", chooser);
 
     // Configure the trigger bindings
@@ -148,7 +158,8 @@ public class RobotContainer {
     commandsMap.put("placeHigh", new PlaceHighAutoCMD(arm, wrist, claw));
     commandsMap.put("armDown", new ArmDownCMD(arm)); 
     commandsMap.put("autoClaw", new AutoClaw(claw, wrist));
-    commandsMap.put("closeClaw", new ClawCloseCMD(claw));
+    commandsMap.put("closeClaw", new ClawCloseAutoCMD(wrist, claw, arm));
+    commandsMap.put("openClaw", new ClawOpenAutoCMD(wrist, claw, arm));
   }
 
   private SwerveAutoBuilder genrateAutoBuilder()

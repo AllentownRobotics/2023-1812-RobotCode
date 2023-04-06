@@ -6,10 +6,8 @@ package frc.robot.commands.AutosCMDs;
 
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.ArmCMDs.ArmDownCMD;
 import frc.robot.commands.ClawCMDs.ClawOpenCMD;
-import frc.robot.commands.ComplexCMDs.ResetCMD;
-import frc.robot.commands.WristCMDs.WristShelfCMD;
+import frc.robot.commands.WristCMDs.WristLowCMD;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.Wrist;
@@ -17,17 +15,14 @@ import frc.robot.subsystems.Wrist;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class PlaceLowAutoCMD extends SequentialCommandGroup {
-  /** Creates a new PlaceCMD. */
-  public PlaceLowAutoCMD(Arm arm, Wrist wrist, Claw claw) {
+public class ClawOpenAutoCMD extends SequentialCommandGroup {
+  /** Creates a new CloseClawAutoCMD. */
+  public ClawOpenAutoCMD(Wrist wrist, Claw claw, Arm arm) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new ArmDownCMD(arm),
-      new WristShelfCMD(wrist),
+      new WristLowCMD(wrist),
       Commands.waitUntil(wrist::atPlace),
-      new ClawOpenCMD(claw),
-      Commands.waitSeconds(.2),
-      new ResetCMD(wrist, claw, arm));
+      new ClawOpenCMD(claw));
   }
 }

@@ -46,6 +46,7 @@ public class DriveTrain extends SubsystemBase {
 
   // The gyro sensor
   private final WPI_Pigeon2 m_gyro = new WPI_Pigeon2(GlobalConstants.PIGEON_ID);
+  
 
   // Odometry class for tracking robot pose
   SwerveDriveOdometry m_odometry = new SwerveDriveOdometry(
@@ -73,8 +74,8 @@ public class DriveTrain extends SubsystemBase {
             m_rearLeft.getPosition(),
             m_rearRight.getPosition()
         });
-    SmartDashboard.putNumber("velocity", m_frontLeft.getWheelVelocity());
-    SmartDashboard.putNumber("Desired velocity", m_frontLeft.getDesiredVelocity());
+    SmartDashboard.putNumber("roll", getRoll());
+    SmartDashboard.putNumber("heading", getHeading());
   }
 
   /**
@@ -199,7 +200,6 @@ public class DriveTrain extends SubsystemBase {
   public void zeroHeading() {
     m_gyro.reset();
   }
-
   /**
    * Returns the heading of the robot.
    *
@@ -210,7 +210,7 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public double getRoll() {
-    return m_gyro.getRoll();
+    return m_gyro.getRoll()+1.6;
   }
 
   public void levelSet(double speed) {

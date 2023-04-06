@@ -23,7 +23,7 @@ public class AutoLevel extends CommandBase {
 
   @Override
   public void execute() {
-      s_Swerve.levelSet(-kLevelingPID.calculate(s_Swerve.getRoll(), 0));
+        s_Swerve.levelSet(-kLevelingPID.calculate(s_Swerve.getRoll(), 0));
   }
 
   @Override

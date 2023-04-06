@@ -21,6 +21,7 @@ public class AutoClaw extends SequentialCommandGroup {
       new ClawOpenCMD(claw),
       Commands.waitUntil(claw::pieceInRange),
       new ClawCloseCMD(claw),
+      Commands.waitSeconds(.05),
       new WristResetCMD(wrist));
   }
 }

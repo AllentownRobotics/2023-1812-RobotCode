@@ -4,6 +4,7 @@
 
 package frc.robot.commands.ComplexCMDs;
 
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.ArmCMDs.ArmDownCMD;
 import frc.robot.commands.ClawCMDs.ClawCloseCMD;
@@ -21,8 +22,9 @@ public class ResetCMD extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new ClawCloseCMD(claw),
       new WristResetCMD(wrist),
+      Commands.waitSeconds(0.05),
+      new ClawCloseCMD(claw),
       new ArmDownCMD(arm));
   }
 }

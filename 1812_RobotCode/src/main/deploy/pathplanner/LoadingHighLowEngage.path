@@ -183,13 +183,19 @@
     {
       "position": 1.15,
       "names": [
-        "autoClaw"
+        "openClaw"
       ]
     },
     {
-      "position": 3.98181818181818,
+      "position": 3.7090909090909077,
       "names": [
         "placeLow"
+      ]
+    },
+    {
+      "position": 1.8545454545454545,
+      "names": [
+        "closeClaw"
       ]
     }
   ]

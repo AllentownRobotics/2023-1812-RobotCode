@@ -36,7 +36,7 @@ public final class Constants {
   public static final class DriveConstants{
   
   //Drive parameters 
-  public static final double MAX_SPEED_MPS = 4;
+  public static final double MAX_SPEED_MPS = 4.5;
   public static final double MAX_ANGLE_SPEED = 2 * Math.PI; //Radians per sec
   
   //chassis config
@@ -157,12 +157,12 @@ public final class Constants {
     public static final double wristI = 0.0;
     public static final double wristD = 0.05;
     public static final double wristFF = 0.0;
-    public static final double wristOutputMax = 0.4;
-    public static final double wristOutputMin = -0.4;
+    public static final double wristOutputMax = 0.375;
+    public static final double wristOutputMin = -0.375;
 
     public static final double wristUpDegrees = 5;
-    public static final double wristLowDegrees = 135;
-    public static final double wristShelfDegrees = 90;
+    public static final double wristLowDegrees = 145;
+    public static final double wristShelfDegrees = 85;
     public static final double wristHighDegrees = 30;
 
     public static final double wristAngleAllowance = 5.0;
@@ -173,8 +173,8 @@ public final class Constants {
   {
     public static final int clawForwardChannel = 3;
     public static final int clawReverseChannel = 2;
-    public static final double sensorCloseDistance = 13.5;
-    public static final double sensorCloseAllowance = 0.75;
+    public static final double sensorCloseDistance = 12.5;
+    public static final double sensorCloseAllowance = .5;
     public static final double clawCloseSeconds = 0.1;
     public static final double clawOpenSeconds = 0.1;
   }
